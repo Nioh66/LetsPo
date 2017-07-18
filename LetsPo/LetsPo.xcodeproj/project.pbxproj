@@ -27,6 +27,12 @@
 		30D092B41F1E466300CB3F88 /* BoardSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D092B31F1E466300CB3F88 /* BoardSettingVC.swift */; };
 		30D092B61F1E490600CB3F88 /* DragBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D092B51F1E490600CB3F88 /* DragBoardVC.swift */; };
 		30D092B91F1E49E800CB3F88 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D092B71F1E49E800CB3F88 /* Account.storyboard */; };
+		9BA62C5D1F1E6506008CDEC0 /* SpotAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA62C5C1F1E6506008CDEC0 /* SpotAnnotation.swift */; };
+		9BA62C5F1F1E65A0008CDEC0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA62C5E1F1E65A0008CDEC0 /* MapViewController.swift */; };
+		9BA62C611F1E66C8008CDEC0 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA62C601F1E66C8008CDEC0 /* MapDetailViewController.swift */; };
+		9BA62C661F1E6752008CDEC0 /* deer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BA62C631F1E6752008CDEC0 /* deer.jpg */; };
+		9BA62C681F1E6752008CDEC0 /* rightBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA62C651F1E6752008CDEC0 /* rightBtn.png */; };
+		9BA62C6A1F1E6E04008CDEC0 /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA62C691F1E6E04008CDEC0 /* map.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +58,12 @@
 		30D092B31F1E466300CB3F88 /* BoardSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardSettingVC.swift; sourceTree = "<group>"; };
 		30D092B51F1E490600CB3F88 /* DragBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragBoardVC.swift; sourceTree = "<group>"; };
 		30D092B81F1E49E800CB3F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Account.storyboard; sourceTree = "<group>"; };
+		9BA62C5C1F1E6506008CDEC0 /* SpotAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAnnotation.swift; sourceTree = "<group>"; };
+		9BA62C5E1F1E65A0008CDEC0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		9BA62C601F1E66C8008CDEC0 /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
+		9BA62C631F1E6752008CDEC0 /* deer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deer.jpg; sourceTree = "<group>"; };
+		9BA62C651F1E6752008CDEC0 /* rightBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightBtn.png; sourceTree = "<group>"; };
+		9BA62C691F1E6E04008CDEC0 /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +148,9 @@
 		30D092801F1E34A300CB3F88 /* ZY */ = {
 			isa = PBXGroup;
 			children = (
+				9BA62C621F1E671D008CDEC0 /* Image */,
+				9BA62C5E1F1E65A0008CDEC0 /* MapViewController.swift */,
+				9BA62C601F1E66C8008CDEC0 /* MapDetailViewController.swift */,
 			);
 			name = ZY;
 			sourceTree = "<group>";
@@ -156,6 +171,7 @@
 		30D092821F1E34C000CB3F88 /* ZY */ = {
 			isa = PBXGroup;
 			children = (
+				9BA62C5C1F1E6506008CDEC0 /* SpotAnnotation.swift */,
 			);
 			name = ZY;
 			sourceTree = "<group>";
@@ -205,6 +221,16 @@
 				30D092AD1F1E45A200CB3F88 /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9BA62C621F1E671D008CDEC0 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				9BA62C631F1E6752008CDEC0 /* deer.jpg */,
+				9BA62C691F1E6E04008CDEC0 /* map.png */,
+				9BA62C651F1E6752008CDEC0 /* rightBtn.png */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,10 +293,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BA62C6A1F1E6E04008CDEC0 /* map.png in Resources */,
 				303B08FB1F1CC61600D7F6B1 /* LaunchScreen.storyboard in Resources */,
+				9BA62C661F1E6752008CDEC0 /* deer.jpg in Resources */,
 				30D092A61F1E41A300CB3F88 /* NewPost.storyboard in Resources */,
 				30D092A41F1E40AE00CB3F88 /* ManagePost.storyboard in Resources */,
 				303B08F81F1CC61600D7F6B1 /* Assets.xcassets in Resources */,
+				9BA62C681F1E6752008CDEC0 /* rightBtn.png in Resources */,
 				30D092A11F1E3FDF00CB3F88 /* SelfPost.storyboard in Resources */,
 				30D092B21F1E461700CB3F88 /* ok.png in Resources */,
 				30D092A91F1E41D600CB3F88 /* Discover.storyboard in Resources */,
@@ -286,12 +315,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BA62C5F1F1E65A0008CDEC0 /* MapViewController.swift in Sources */,
 				30D092941F1E369500CB3F88 /* NewPostVC.swift in Sources */,
 				30D092901F1E35BB00CB3F88 /* MyPhoto.swift in Sources */,
 				30D0928D1F1E35BB00CB3F88 /* NoteText.swift in Sources */,
 				303B08F11F1CC61600D7F6B1 /* AppDelegate.swift in Sources */,
+				9BA62C5D1F1E6506008CDEC0 /* SpotAnnotation.swift in Sources */,
 				30D0928F1F1E35BB00CB3F88 /* MyButton.swift in Sources */,
 				30D0928C1F1E35BB00CB3F88 /* Note.swift in Sources */,
+				9BA62C611F1E66C8008CDEC0 /* MapDetailViewController.swift in Sources */,
 				30D092B41F1E466300CB3F88 /* BoardSettingVC.swift in Sources */,
 				30D0928E1F1E35BB00CB3F88 /* NoteScrollview.swift in Sources */,
 				30D092B61F1E490600CB3F88 /* DragBoardVC.swift in Sources */,
