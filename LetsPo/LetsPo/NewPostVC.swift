@@ -17,16 +17,11 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
     var textContainer = NSTextContainer()
     
     var myInputView : UIView?
-    let ncName = Notification.Name(rawValue: "Hi")
     var keyboardHeight:CGFloat? = nil
-    var photographer:UIImagePickerController!
+    var photographer = UIImagePickerController()
     var imageFactory = MyPhoto()
     
-    //    var inputAccessoryViewController: UIInputViewController?
-    //    var inputAccessoryView: UIView?
-    
     deinit {
-        NotificationCenter.default.removeObserver(self, name: ncName, object: nil);
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
     }
     
@@ -52,14 +47,6 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         tap.numberOfTapsRequired = 1
         
         self.view.addGestureRecognizer(tap)
-        
-        //        let UIKeyboardFrameBeginUserInfoKey: String
-        
-        //        let myAccessoryView = UIView()
-        //
-        //        myAccessoryView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 40)
-        //        myAccessoryView.backgroundColor = UIColor.red
-        //        thePost.myText.inputAccessoryView = myAccessoryView
         
         let functionBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 30))
         functionBar.barStyle = .default
@@ -87,22 +74,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         functionBar.setItems(itemsArray, animated: true)
         
         myTextView.inputAccessoryView = functionBar
-        
-        
-        //        let textBtn = UIButton(type: .system)
-        //        textBtn.frame =  CGRect(x: 0, y: 0, width: 40, height: 40)
-        //        textBtn.backgroundColor = UIColor.brown
-        //        textBtn.setTitle("text", for: .normal)
-        //        textBtn.addTarget(self, action: #selector(addPic), for: .touchUpInside)
-        //        myAccessoryView.addSubview(textBtn)
-        //
-        //        let textBtn00 = UIButton(type: .system)
-        //        textBtn00.frame =  CGRect(x: 0, y: 0, width: 40, height: 40)
-        //        textBtn00.backgroundColor = UIColor.brown
-        //        textBtn00.setTitle("text00", for: .normal)
-        //        textBtn00.addTarget(self, action: #selector(addPic), for: .touchUpInside)
-        //        myAccessoryView.addSubview(textBtn00)
-        
+      
         self.setKeyboardObserver()
         
     }
@@ -110,13 +82,8 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         
         //      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: ncName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    func keyboardWillHide(kbNotification: NSNotification) {
-        //..
-    }
-    
+      }
+   
     func keyboardWillShow(kbNotification:Notification) {
         
         guard let kbInfo:[AnyHashable:Any] = kbNotification.userInfo,
@@ -424,20 +391,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
-    
-    
-    //    @IBAction func save(_ sender:Any?){
-    //        UIImageWriteToSavedPhotosAlbum(savedImage, self, #selector(saveImage(_:didFinishSavingWithError:contextInfo:)), nil)
-    //            thePost.addImageInText(Image: savedImage)
-    //    }
-    //
-    
-    
-    
-    
+
     
     // MARK: hideKeyboard
     func hideKeyboard(tapG:UITapGestureRecognizer){
