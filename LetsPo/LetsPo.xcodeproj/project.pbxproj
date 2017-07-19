@@ -27,6 +27,13 @@
 		30D092B41F1E466300CB3F88 /* BoardSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D092B31F1E466300CB3F88 /* BoardSettingVC.swift */; };
 		30D092B61F1E490600CB3F88 /* DragBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D092B51F1E490600CB3F88 /* DragBoardVC.swift */; };
 		30D092B91F1E49E800CB3F88 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30D092B71F1E49E800CB3F88 /* Account.storyboard */; };
+		30D092BB1F1E8BD900CB3F88 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D092BA1F1E8BD900CB3F88 /* Photos.framework */; };
+		30D092BE1F1E90EA00CB3F88 /* takePhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 30D092BC1F1E90EA00CB3F88 /* takePhoto.png */; };
+		30D092BF1F1E90EA00CB3F88 /* Photos.png in Resources */ = {isa = PBXBuildFile; fileRef = 30D092BD1F1E90EA00CB3F88 /* Photos.png */; };
+		30D092C51F1E950800CB3F88 /* ooxx.png in Resources */ = {isa = PBXBuildFile; fileRef = 30D092C11F1E950800CB3F88 /* ooxx.png */; };
+		30D092C61F1E950800CB3F88 /* Sky.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D092C21F1E950800CB3F88 /* Sky.jpg */; };
+		30D092C71F1E950800CB3F88 /* whiteboard-303145_960_720.png in Resources */ = {isa = PBXBuildFile; fileRef = 30D092C31F1E950800CB3F88 /* whiteboard-303145_960_720.png */; };
+		30D092CA1F1E956200CB3F88 /* myNigger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30D092C91F1E956200CB3F88 /* myNigger.jpg */; };
 		9BA62C5D1F1E6506008CDEC0 /* SpotAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA62C5C1F1E6506008CDEC0 /* SpotAnnotation.swift */; };
 		9BA62C5F1F1E65A0008CDEC0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA62C5E1F1E65A0008CDEC0 /* MapViewController.swift */; };
 		9BA62C611F1E66C8008CDEC0 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA62C601F1E66C8008CDEC0 /* MapDetailViewController.swift */; };
@@ -58,6 +65,13 @@
 		30D092B31F1E466300CB3F88 /* BoardSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardSettingVC.swift; sourceTree = "<group>"; };
 		30D092B51F1E490600CB3F88 /* DragBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragBoardVC.swift; sourceTree = "<group>"; };
 		30D092B81F1E49E800CB3F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Account.storyboard; sourceTree = "<group>"; };
+		30D092BA1F1E8BD900CB3F88 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		30D092BC1F1E90EA00CB3F88 /* takePhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = takePhoto.png; sourceTree = "<group>"; };
+		30D092BD1F1E90EA00CB3F88 /* Photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Photos.png; sourceTree = "<group>"; };
+		30D092C11F1E950800CB3F88 /* ooxx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ooxx.png; sourceTree = "<group>"; };
+		30D092C21F1E950800CB3F88 /* Sky.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sky.jpg; sourceTree = "<group>"; };
+		30D092C31F1E950800CB3F88 /* whiteboard-303145_960_720.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteboard-303145_960_720.png"; sourceTree = "<group>"; };
+		30D092C91F1E956200CB3F88 /* myNigger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = myNigger.jpg; sourceTree = "<group>"; };
 		9BA62C5C1F1E6506008CDEC0 /* SpotAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAnnotation.swift; sourceTree = "<group>"; };
 		9BA62C5E1F1E65A0008CDEC0 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9BA62C601F1E66C8008CDEC0 /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30D092BB1F1E8BD900CB3F88 /* Photos.framework in Frameworks */,
 				30D092B01F1E45A900CB3F88 /* CoreLocation.framework in Frameworks */,
 				30D092AE1F1E45A200CB3F88 /* MapKit.framework in Frameworks */,
 			);
@@ -158,7 +173,7 @@
 		30D092811F1E34B900CB3F88 /* PL */ = {
 			isa = PBXGroup;
 			children = (
-				30D092B11F1E461700CB3F88 /* ok.png */,
+				30D092C81F1E952000CB3F88 /* PLImage */,
 				30D092871F1E35BB00CB3F88 /* Note.swift */,
 				30D092881F1E35BB00CB3F88 /* NoteText.swift */,
 				30D092891F1E35BB00CB3F88 /* NoteScrollview.swift */,
@@ -217,10 +232,25 @@
 		30D092AC1F1E45A100CB3F88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				30D092BA1F1E8BD900CB3F88 /* Photos.framework */,
 				30D092AF1F1E45A900CB3F88 /* CoreLocation.framework */,
 				30D092AD1F1E45A200CB3F88 /* MapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30D092C81F1E952000CB3F88 /* PLImage */ = {
+			isa = PBXGroup;
+			children = (
+				30D092C91F1E956200CB3F88 /* myNigger.jpg */,
+				30D092C11F1E950800CB3F88 /* ooxx.png */,
+				30D092C21F1E950800CB3F88 /* Sky.jpg */,
+				30D092C31F1E950800CB3F88 /* whiteboard-303145_960_720.png */,
+				30D092BC1F1E90EA00CB3F88 /* takePhoto.png */,
+				30D092BD1F1E90EA00CB3F88 /* Photos.png */,
+				30D092B11F1E461700CB3F88 /* ok.png */,
+			);
+			name = PLImage;
 			sourceTree = "<group>";
 		};
 		9BA62C621F1E671D008CDEC0 /* Image */ = {
@@ -293,16 +323,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30D092C61F1E950800CB3F88 /* Sky.jpg in Resources */,
 				9BA62C6A1F1E6E04008CDEC0 /* map.png in Resources */,
 				303B08FB1F1CC61600D7F6B1 /* LaunchScreen.storyboard in Resources */,
 				9BA62C661F1E6752008CDEC0 /* deer.jpg in Resources */,
 				30D092A61F1E41A300CB3F88 /* NewPost.storyboard in Resources */,
+				30D092CA1F1E956200CB3F88 /* myNigger.jpg in Resources */,
+				30D092BF1F1E90EA00CB3F88 /* Photos.png in Resources */,
 				30D092A41F1E40AE00CB3F88 /* ManagePost.storyboard in Resources */,
 				303B08F81F1CC61600D7F6B1 /* Assets.xcassets in Resources */,
 				9BA62C681F1E6752008CDEC0 /* rightBtn.png in Resources */,
+				30D092C71F1E950800CB3F88 /* whiteboard-303145_960_720.png in Resources */,
+				30D092C51F1E950800CB3F88 /* ooxx.png in Resources */,
 				30D092A11F1E3FDF00CB3F88 /* SelfPost.storyboard in Resources */,
 				30D092B21F1E461700CB3F88 /* ok.png in Resources */,
 				30D092A91F1E41D600CB3F88 /* Discover.storyboard in Resources */,
+				30D092BE1F1E90EA00CB3F88 /* takePhoto.png in Resources */,
 				30D092B91F1E49E800CB3F88 /* Account.storyboard in Resources */,
 				303B08F61F1CC61600D7F6B1 /* Main.storyboard in Resources */,
 			);

@@ -18,7 +18,6 @@ class MyButton: UIButton {
         self.tag = tag
         self.backgroundColor = bgColor
         self.setTitle(title, for: .normal)
-
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

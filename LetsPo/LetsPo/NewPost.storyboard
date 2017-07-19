@@ -85,10 +85,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ok.png" translatesAutoresizingMaskIntoConstraints="NO" id="trC-1M-Hao">
-                                <rect key="frame" x="149" y="535" width="77" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oih-ln-eRa">
                                 <rect key="frame" x="56" y="90" width="262.5" height="400"/>
                                 <subviews>
@@ -141,11 +137,20 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ok.png" translatesAutoresizingMaskIntoConstraints="NO" id="trC-1M-Hao">
+                                <rect key="frame" x="150.5" y="503" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="trC-1M-Hao" secondAttribute="height" multiplier="1:1" id="EYO-Uk-1bI"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Q6F-i8-c7S" firstAttribute="top" secondItem="trC-1M-Hao" secondAttribute="bottom" constant="40" id="6x2-ov-WHr"/>
                             <constraint firstItem="Oih-ln-eRa" firstAttribute="centerY" secondItem="87Y-6w-E3X" secondAttribute="centerY" multiplier="0.87" id="F4F-Ji-mDZ"/>
+                            <constraint firstItem="trC-1M-Hao" firstAttribute="width" secondItem="87Y-6w-E3X" secondAttribute="width" multiplier="0.2" id="RqD-Mc-uo2"/>
                             <constraint firstItem="Oih-ln-eRa" firstAttribute="width" secondItem="87Y-6w-E3X" secondAttribute="width" multiplier="0.7" id="ijX-V7-lGc"/>
+                            <constraint firstItem="trC-1M-Hao" firstAttribute="centerX" secondItem="87Y-6w-E3X" secondAttribute="centerX" id="mk5-Iv-92i"/>
                             <constraint firstItem="Oih-ln-eRa" firstAttribute="centerX" secondItem="87Y-6w-E3X" secondAttribute="centerX" id="oNq-Yg-I47"/>
                             <constraint firstItem="Oih-ln-eRa" firstAttribute="height" secondItem="87Y-6w-E3X" secondAttribute="height" multiplier="0.6" id="uYj-tM-x1j"/>
                         </constraints>
@@ -157,7 +162,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zpD-uh-mpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2657" y="1424"/>
+            <point key="canvasLocation" x="2656.8000000000002" y="1423.5382308845578"/>
+        </scene>
+        <!--Drag BoardVC-->
+        <scene sceneID="oJa-oa-i9V">
+            <objects>
+                <viewController storyboardIdentifier="DragBoardVC" id="kkj-us-Qpl" customClass="DragBoardVC" customModule="LetsPo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mrN-WI-eNP"/>
+                        <viewControllerLayoutGuide type="bottom" id="IgU-6g-QGs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ndV-sd-aCe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wEW-pa-ZGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3432" y="1424"/>
         </scene>
     </scenes>
     <resources>
