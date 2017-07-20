@@ -20,8 +20,9 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
     var region = CLCircularRegion()
     var reUpdate = NSLock()
     var shouldReUpdate = Bool()
-    var near = [[String:Any]]()
+    var nearbyDictionary = [[String:Any]]()
     var titleName:String = ""
+    var count: Int = 0
     
     
    
@@ -39,6 +40,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .automotiveNavigation
+        
+        
         Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { (timer) in
             // 防止秒數內再度觸發方法
             self.doUnlock()
@@ -79,6 +82,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         mapView.setRegion(mapRegion, animated: true)
     }
     
+    // mark - pins method
     func filterAnnotations(paramPlaces:[SpotAnnotation]){
         let latDelta = self.mapView.region.span.latitudeDelta / 15
         let lonDelta = self.mapView.region.span.longitudeDelta / 15
@@ -172,12 +176,32 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         
         return pin
     }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let myAnnotation = view.annotation as! SpotAnnotation
+        let placeCount = myAnnotation.placesCount()
+        
+        if placeCount <= 0 {return}
+        
+        if placeCount == 1 {
+            titleName = myAnnotation.currentTitle
+            if (control as? UIButton)?.buttonType == .detailDisclosure {
+                performSegue(withIdentifier:"getDetail", sender: self)
+            }
+            print("Press one callout view")
+        }else {
+            print("Press many callout view")
+        }
+    }
+    
     func doUnlock(){
         reUpdate.unlock()
         if shouldReUpdate{
             shouldReUpdate = false
         }
     }
+    
+    // mark - Region monitoring method
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if reUpdate.try() == false {
@@ -203,6 +227,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         //        print("monitoringDidFailForRegion \(String(describing: region)) \(error)")
         
     }
+    
     func mutableNotificationContent(title:String, body:String, indentifier:String){
         let content = UNMutableNotificationContent()
         content.title = title
@@ -216,10 +241,12 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             }
         }
     }
+    
     func monitorRegion(){
         let userLocation = mapView.userLocation.location
         let dic = getLocations()
         var distance = CLLocationDistance()
+        count = count + 1
         for value in dic {
             let strName = value["friendName"] as! String
             
@@ -236,69 +263,43 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             
             let pins = CLLocation.init(latitude: lat, longitude: lon)
             distance = pins.distance(from: userLocation!) * 1.09361
+            
             // 距離小於 2500 則存回 near
             if distance <  2500 {
-                //                print("\(distance) - \(strName)")
-                near = [["name":strName,"lat":lat, "lon":lon, "distance":distance]]
-                
-                //                near.sort { ($0["distance"] as! String) < ($1["distance"] as! String) }
-                //                let sortedArray = near.sorted(by: { (dictOne, dictTwo) -> Bool in
-                //                    let d1 = dictOne["distance"]! as! Double
-                //                    let d2 = dictTwo["distance"]! as! Double
                 //
-                //                    return d1 < d2
-                //                })
-                
-                
-                startMonitoring()
-                
-            }
-            
-        }
-    }
-    struct nearBy {
-        var titleName: String
-        var lat: Double
-        var lon: Double
-        var distance: Double
-        
-    }
-    
-    func startMonitoring(){
-        for value in near {
-            
-            let name = value["name"] as! String
-            let lat = value["lat"] as! Double
-            let lon = value["lon"] as! Double
-            let distance = value["distance"] as! Double
-            //        var nearArray = [nearBy]()
-            //        nearArray.append(nearBy(
-            //            titleName : name,
-            //            lat : lat,
-            //            lon: lon,
-            //            distance : distance))
-            //        let sortNearArray = nearArray.sorted(by: { image1, image2 in return image1.distance < image2.distance })
-            //
-            
-            //        print(sortNearArray.count)
-            //            print(near)
-            
-            if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
-                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                region = CLCircularRegion.init(center: coordinate, radius: 150, identifier: name)
-                //            print("name:\(name) lat:\(lat) lon:\(lon) dis:\(distance)")
-                // near 內的定位開始 Monitoring
-                locationManager.startMonitoring(for: region)
-                locationManager.requestState(for: region)
-                
-                // 超過 2300 則停止 Monitoring
-                if distance > 2300 {
-                    locationManager.stopMonitoring(for: region)
-                    print("stop \(name)")
+                //                near = ["name":strName,"lat":lat, "lon":lon, "distance":distance]
+                //
+                if count == 1 {
+                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName": UIImage(named: "deer.jpg")!])
+                }else {
+                    count = 0
+                    nearbyDictionary.removeAll()
+                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName": UIImage(named: "deer.jpg")!])
+                    count = 1
                 }
-                
+                if nearbyDictionary.count < 20 {
+                    if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
+                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                        region = CLCircularRegion.init(center: coordinate, radius: 150, identifier: strName)
+                        
+                        // nearbyDictionary 內的定位開始 Monitoring
+                        locationManager.startMonitoring(for: region)
+                        locationManager.requestState(for: region)
+                        
+                        // 超過 2300 則停止 Monitoring
+                        if distance > 2300 {
+                            locationManager.stopMonitoring(for: region)
+                            print("stop \(strName)")
+                        }
+                    }
+                }
             }
         }
+        nearbyDictionary.sort { ($0["distance"] as! Double) < ($1["distance"] as! Double) }
+        let notificationName = Notification.Name("GetUpdateNoti")
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["PASS":nearbyDictionary])
+//        print(nearbyDictionary)
+//        print(nearbyDictionary.count)
     }
     
     func spot() -> [SpotAnnotation] {
@@ -308,7 +309,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         for value in dic {
             let strName = value["friendName"] as! String
             
-            //            let time = value["lastUpdateDateTime"] as! String
+            // let time = value["lastUpdateDateTime"] as! String
             
             var lat = CLLocationDegrees()
             if let latt = Double(value["lat"] as! String) {
@@ -318,7 +319,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             if let lonn = Double(value["lon"] as! String) {
                 lon = lonn
             }
-            //            let ID = Int(value["id"] as! String)
+            //  let ID = Int(value["id"] as! String)
             
             let annotation = SpotAnnotation(atitle: strName, lat: lat, lon: lon, imageName: UIImage(named: "deer.jpg")!)
             
@@ -343,22 +344,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         return friends
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let myAnnotation = view.annotation as! SpotAnnotation
-        let placeCount = myAnnotation.placesCount()
-        
-        if placeCount <= 0 {return}
-        
-        if placeCount == 1 {
-            titleName = myAnnotation.currentTitle
-            if (control as? UIButton)?.buttonType == .detailDisclosure {
-                performSegue(withIdentifier:"getDetail", sender: self)
-            }
-            print("Press one callout view")
-        }else {
-            print("Press many callout view")
-        }
-    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

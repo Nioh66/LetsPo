@@ -17,10 +17,11 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
     @IBOutlet weak var scrollView: UIScrollView!
     
     var deleteBtnFlag:Bool!
-    
     var recent:NSMutableArray = []
     var nearby:NSMutableArray = []
     var all:NSMutableArray = []
+    var nearbyDic = [[String:Any]]()
+    
     
     var collectionViewTwo:UICollectionView!
     var collectionViewOne: UICollectionView!
@@ -28,6 +29,9 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        
+        
         // register three collectionView
         collectionViewOne = UICollectionView(frame: self.view.frame, collectionViewLayout: FlowLayout())
         collectionViewOne.register(UINib.init(nibName: "ManageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
@@ -52,7 +56,14 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         self.view.addSubview(collectionViewThree)
         
         // temporary content image
-        nearby = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
+        
+        
+//        for value in nearbyDic {
+//            let strName = value["imageName"] as! UIImage
+//            nearby.add(strName)
+//        }
+        
+//        nearby = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
         all = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
         
         recent = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
@@ -71,7 +82,16 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         
         
     }
-    
+    func getUpdateNoti(noti:Notification) {
+        nearbyDic = noti.userInfo!["PASS"] as! [[String : Any]]
+        print("fff \(nearbyDic)")
+        NotificationCenter.default.removeObserver(self)
+        for value in nearbyDic {
+            let strName = value["imageName"] as! UIImage
+            nearby.add(strName)
+        }
+        
+    }
     
     // set frame for scroll view
     override func viewDidLayoutSubviews() {
@@ -195,5 +215,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        let notificationName = Notification.Name("GetUpdateNoti")
+        NotificationCenter.default.addObserver(self, selector: #selector(getUpdateNoti(noti:)), name: notificationName, object: nil)
     }
 }
