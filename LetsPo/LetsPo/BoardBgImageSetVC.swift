@@ -12,6 +12,17 @@ import UIKit
 class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var photographer = UIImagePickerController()
     let imageFactory = MyPhoto()
+    var bgImage:UIImage? = nil
+    let sendBgImageNN = Notification.Name("sendBgImage")
+
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name(rawValue:"sendBgImage"),
+                                                  object: nil)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,21 +33,43 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         
         
         
-        let tapDefault = UITapGestureRecognizer(target: self, action: #selector(getDefaultBg))
+        let tapDefault01 = UITapGestureRecognizer(target: self, action: #selector(getDefault01Bg))
+        let tapDefault02 = UITapGestureRecognizer(target: self, action: #selector(getDefault02Bg))
+        let tapDefault03 = UITapGestureRecognizer(target: self, action: #selector(getDefault03Bg))
+        let tapDefault04 = UITapGestureRecognizer(target: self, action: #selector(getDefault04Bg))
+
         let tapGetPhotos = UITapGestureRecognizer(target: self, action: #selector(getPhotosBg))
         let tapTakePhoto = UITapGestureRecognizer(target: self, action: #selector(takeBgPhoto))
         
-        let defaultBg01 = UIImageView(frame: CGRect(x: width_Padding, y: hight_Padding, width: imageWidth, height: imageHight))
+        let defaultBg01 = UIImageView(frame: CGRect(x: width_Padding,
+                                                    y: hight_Padding,
+                                                    width: imageWidth,
+                                                    height: imageHight))
         
-        let defaultBg02 = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth, y: hight_Padding, width: imageWidth, height: imageHight))
+        let defaultBg02 = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth,
+                                                    y: hight_Padding,
+                                                    width: imageWidth,
+                                                    height: imageHight))
         
-        let defaultBg03 = UIImageView(frame: CGRect(x: width_Padding, y: hight_Padding*2+imageHight, width: imageWidth, height: imageHight))
+        let defaultBg03 = UIImageView(frame: CGRect(x: width_Padding,
+                                                    y: hight_Padding*2+imageHight,
+                                                    width: imageWidth,
+                                                    height: imageHight))
         
-        let defaultBg04 = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth, y: hight_Padding*2+imageHight, width: imageWidth, height: imageHight))
+        let defaultBg04 = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth,
+                                                    y: hight_Padding*2+imageHight,
+                                                    width: imageWidth,
+                                                    height: imageHight))
         
-        let photosBg = UIImageView(frame: CGRect(x: width_Padding, y: hight_Padding*3+imageHight*2, width: imageWidth, height: imageHight))
+        let photosBg = UIImageView(frame: CGRect(x: width_Padding,
+                                                 y: hight_Padding*3+imageHight*2,
+                                                 width: imageWidth,
+                                                 height: imageHight))
         
-        let takeAPhoto = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth, y: hight_Padding*3+imageHight*2, width: imageWidth, height: imageHight))
+        let takeAPhoto = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth,
+                                                   y: hight_Padding*3+imageHight*2,
+                                                   width: imageWidth,
+                                                   height: imageHight))
         
         defaultBg01.image = UIImage(named: "ooxx")
         //   defaultBg01.image = UIImage(contentsOfFile: "ooxx")
@@ -69,12 +102,14 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         
         
         
-        defaultBg01.addGestureRecognizer(tapDefault)
-        defaultBg02.addGestureRecognizer(tapDefault)
-        defaultBg03.addGestureRecognizer(tapDefault)
-        defaultBg04.addGestureRecognizer(tapDefault)
+        defaultBg01.addGestureRecognizer(tapDefault01)
+        defaultBg02.addGestureRecognizer(tapDefault02)
+        defaultBg03.addGestureRecognizer(tapDefault03)
+        defaultBg04.addGestureRecognizer(tapDefault04)
         photosBg.addGestureRecognizer(tapGetPhotos)
         takeAPhoto.addGestureRecognizer(tapTakePhoto)
+        
+        
         
         self.view.addSubview(defaultBg01)
         self.view.addSubview(defaultBg02)
@@ -84,18 +119,70 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         self.view.addSubview(takeAPhoto)
         
         
-    }
+        
+        
+           }
     
-    func getDefaultBg(){
+//    func theChooseOne(notification:Notification) {
+//        
+//        NotificationCenter.default.addObserver(self, selector: #selector(theChooseOne),
+//                                               name: sendBgImageNN,
+//                                               object: nil)
+//        
+//
+//    }
+    
+    
+    func getDefault01Bg(){
+        bgImage = UIImage(named: "ooxx")
+        
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
+        
         print("get the default bg pic!")
+        
+        
+        navigationController?.popViewController(animated: true)
+
+        
+        //        let nextVC = storyboard?.instantiateViewController(withIdentifier:"BoardSettingVC") as! BoardSettingVC
+//               dismiss(animated: true, completion: nil)
+
+
     }
+    func getDefault02Bg(){
+        bgImage = UIImage(named: "myNigger.jpg")
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
+        print("get the default bg pic!")
+        navigationController?.popViewController(animated: true)
+
+    }
+
+    func getDefault03Bg(){
+        bgImage = UIImage(named: "whiteboard-303145_960_720")
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
+        print("get the default bg pic!")
+        
+        navigationController?.popViewController(animated: true)
+
+    }
+
+    func getDefault04Bg(){
+        bgImage = UIImage(named: "Sky.jpg")
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
+        print("get the default bg pic!")
+        navigationController?.popViewController(animated: true)
+    }
+
     func getPhotosBg(){
         self.addPictureBtn()
         print("get the bg pic from photos!")
+        navigationController?.popViewController(animated: true)
     }
     func takeBgPhoto(){
         self.takePictureBtn()
         print("Take the photo for bg!")
+        
+        navigationController?.popViewController(animated: true)
         
     }
     
@@ -173,8 +260,7 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         }
         
         UIImageWriteToSavedPhotosAlbum(imageX, self, #selector(saveImage(_:didFinishSavingWithError:contextInfo:)), nil)
-        
-        
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":imageX])
         self.dismiss(animated: true, completion: nil)
         
     }
