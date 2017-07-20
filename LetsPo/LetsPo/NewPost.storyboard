@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -138,7 +139,7 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ok.png" translatesAutoresizingMaskIntoConstraints="NO" id="trC-1M-Hao">
-                                <rect key="frame" x="150.5" y="503" width="75" height="75"/>
+                                <rect key="frame" x="150.5" y="532" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="trC-1M-Hao" secondAttribute="height" multiplier="1:1" id="EYO-Uk-1bI"/>
                                 </constraints>
@@ -146,9 +147,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Q6F-i8-c7S" firstAttribute="top" secondItem="trC-1M-Hao" secondAttribute="bottom" constant="40" id="6x2-ov-WHr"/>
                             <constraint firstItem="Oih-ln-eRa" firstAttribute="centerY" secondItem="87Y-6w-E3X" secondAttribute="centerY" multiplier="0.87" id="F4F-Ji-mDZ"/>
                             <constraint firstItem="trC-1M-Hao" firstAttribute="width" secondItem="87Y-6w-E3X" secondAttribute="width" multiplier="0.2" id="RqD-Mc-uo2"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="trC-1M-Hao" secondAttribute="bottom" constant="60" id="b0U-0U-lnc"/>
                             <constraint firstItem="Oih-ln-eRa" firstAttribute="width" secondItem="87Y-6w-E3X" secondAttribute="width" multiplier="0.7" id="ijX-V7-lGc"/>
                             <constraint firstItem="trC-1M-Hao" firstAttribute="centerX" secondItem="87Y-6w-E3X" secondAttribute="centerX" id="mk5-Iv-92i"/>
                             <constraint firstItem="Oih-ln-eRa" firstAttribute="centerX" secondItem="87Y-6w-E3X" secondAttribute="centerX" id="oNq-Yg-I47"/>
@@ -158,16 +159,17 @@
                     <connections>
                         <outlet property="boardCheckBtn" destination="trC-1M-Hao" id="1bb-zB-Trj"/>
                         <outlet property="boardSetting" destination="Oih-ln-eRa" id="xgF-iW-s0q"/>
+                        <segue destination="kkj-us-Qpl" kind="show" identifier="goBackSetting" id="1oS-DC-dUl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zpD-uh-mpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2656.8000000000002" y="1423.5382308845578"/>
         </scene>
-        <!--Drag BoardVC-->
+        <!--Board Bg Image SetVC-->
         <scene sceneID="oJa-oa-i9V">
             <objects>
-                <viewController storyboardIdentifier="DragBoardVC" id="kkj-us-Qpl" customClass="DragBoardVC" customModule="LetsPo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BoardBgImageSetVC" id="kkj-us-Qpl" customClass="BoardBgImageSetVC" customModule="LetsPo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mrN-WI-eNP"/>
                         <viewControllerLayoutGuide type="bottom" id="IgU-6g-QGs"/>
