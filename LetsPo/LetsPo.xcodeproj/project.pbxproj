@@ -357,12 +357,9 @@
 				303B08FB1F1CC61600D7F6B1 /* LaunchScreen.storyboard in Resources */,
 				9BA62C661F1E6752008CDEC0 /* deer.jpg in Resources */,
 				30D092A61F1E41A300CB3F88 /* NewPost.storyboard in Resources */,
-<<<<<<< .merge_file_JIYizT
 				9BA62C721F1F716F008CDEC0 /* delete.png in Resources */,
-=======
 				30D092CA1F1E956200CB3F88 /* myNigger.jpg in Resources */,
 				30D092BF1F1E90EA00CB3F88 /* Photos.png in Resources */,
->>>>>>> .merge_file_1AVLRM
 				30D092A41F1E40AE00CB3F88 /* ManagePost.storyboard in Resources */,
 				303B08F81F1CC61600D7F6B1 /* Assets.xcassets in Resources */,
 				9BA62C681F1E6752008CDEC0 /* rightBtn.png in Resources */,
@@ -371,11 +368,8 @@
 				30D092A11F1E3FDF00CB3F88 /* SelfPost.storyboard in Resources */,
 				30D092B21F1E461700CB3F88 /* ok.png in Resources */,
 				30D092A91F1E41D600CB3F88 /* Discover.storyboard in Resources */,
-<<<<<<< .merge_file_JIYizT
 				9BA62C701F1F6F11008CDEC0 /* ManageCollectionViewCell.xib in Resources */,
-=======
 				30D092BE1F1E90EA00CB3F88 /* takePhoto.png in Resources */,
->>>>>>> .merge_file_1AVLRM
 				30D092B91F1E49E800CB3F88 /* Account.storyboard in Resources */,
 				303B08F61F1CC61600D7F6B1 /* Main.storyboard in Resources */,
 			);
