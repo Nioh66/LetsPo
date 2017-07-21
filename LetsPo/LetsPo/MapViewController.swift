@@ -41,7 +41,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .automotiveNavigation
         
-        
+        self.locationManager.startUpdatingLocation()
         Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { (timer) in
             // 防止秒數內再度觸發方法
             self.doUnlock()
@@ -68,7 +68,6 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         locationButton.setImage(btnImage, for: .normal)
         
         self.view.addSubview(locationButton)
-        
         
         
     }
@@ -145,11 +144,19 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             pin?.annotation = annotation
         }
         let rightBtn = UIButton(type: .detailDisclosure)
-        rightBtn.setImage(UIImage(named: "rightBtn.png"), for: .normal)
+//                rightBtn.setImage(UIImage(named: "rightBtn.png"), for: .normal)
+        rightBtn.frame = CGRect(x: 2, y: 0, width: 40, height: 40)
+
+
         pin?.rightCalloutAccessoryView = rightBtn
+        
+        
+        let left = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 1))
+        pin?.leftCalloutAccessoryView = left
         
         let myAnnotation = annotation as! SpotAnnotation
         let detailImage = UIImageView.init(image: myAnnotation.image)
+
         
         // Detail view 的 Constraint
         let widthConstraint = NSLayoutConstraint(item: detailImage,
@@ -208,9 +215,11 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             shouldReUpdate = true
             return
         }
+        monitorRegion(userLocation: locations.last!)
+        
         locationManager.stopUpdatingLocation()
-        monitorRegion()
     }
+    
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
         print("CREATED REGION: \(region.identifier) - \(locationManager.monitoredRegions.count)")
         
@@ -242,8 +251,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         }
     }
     
-    func monitorRegion(){
-        let userLocation = mapView.userLocation.location
+    func monitorRegion(userLocation:CLLocation){
+        let userLocation = userLocation
         let dic = getLocations()
         var distance = CLLocationDistance()
         count = count + 1
@@ -262,19 +271,16 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             }
             
             let pins = CLLocation.init(latitude: lat, longitude: lon)
-            distance = pins.distance(from: userLocation!) * 1.09361
+            distance = pins.distance(from: userLocation) * 1.09361
             
             // 距離小於 2500 則存回 near
             if distance <  2500 {
-                //
-                //                near = ["name":strName,"lat":lat, "lon":lon, "distance":distance]
-                //
                 if count == 1 {
-                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName": UIImage(named: "deer.jpg")!])
+                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName":"sky.jpg"])
                 }else {
                     count = 0
                     nearbyDictionary.removeAll()
-                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName": UIImage(named: "deer.jpg")!])
+                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName":"sky.jpg"])
                     count = 1
                 }
                 if nearbyDictionary.count < 20 {
@@ -298,8 +304,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         nearbyDictionary.sort { ($0["distance"] as! Double) < ($1["distance"] as! Double) }
         let notificationName = Notification.Name("GetUpdateNoti")
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["PASS":nearbyDictionary])
-//        print(nearbyDictionary)
-//        print(nearbyDictionary.count)
+        print(nearbyDictionary)
+        print(nearbyDictionary.count)
     }
     
     func spot() -> [SpotAnnotation] {
@@ -325,7 +331,6 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             
             result.append(annotation)
         }
-        
         return result
     }
     func getLocations() -> [[String:Any]] {
@@ -339,6 +344,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         }
         if let jsonArray = try? JSONSerialization.jsonObject(with: data, options:[])  as? [String:AnyObject] {
             friends = (jsonArray?["friends"] as? [[String:Any]])!
+            friends.sort { ($0["lastUpdateDateTime"] as! String) > ($1["lastUpdateDateTime"] as! String) }
+            
         }
         
         return friends
@@ -360,5 +367,4 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             vc.navigationItem.title = titleName
         }
     }
-
 }

@@ -21,16 +21,21 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
     var nearby:NSMutableArray = []
     var all:NSMutableArray = []
     var nearbyDic = [[String:Any]]()
-    
+    var count = 0
     
     var collectionViewTwo:UICollectionView!
     var collectionViewOne: UICollectionView!
     var collectionViewThree:UICollectionView!
+    
+//    deinit {
+//        NotificationCenter.default.removeObserver(self)
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        
+       
+
         
         // register three collectionView
         collectionViewOne = UICollectionView(frame: self.view.frame, collectionViewLayout: FlowLayout())
@@ -57,13 +62,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         
         // temporary content image
         
-        
-//        for value in nearbyDic {
-//            let strName = value["imageName"] as! UIImage
-//            nearby.add(strName)
-//        }
-        
-//        nearby = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
+ //        nearby = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
         all = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
         
         recent = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
@@ -84,13 +83,25 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
     }
     func getUpdateNoti(noti:Notification) {
         nearbyDic = noti.userInfo!["PASS"] as! [[String : Any]]
-        print("fff \(nearbyDic)")
-        NotificationCenter.default.removeObserver(self)
+//        print("fff \(nearbyDic)")
+        count = count + 1
+        
         for value in nearbyDic {
-            let strName = value["imageName"] as! UIImage
-            nearby.add(strName)
+            let imageName = value["imageName"] as! String
+            if count == 1 {
+                nearby.add(imageName)
+            }else {
+                count = 0
+                nearby.removeAllObjects()
+                nearby.add(imageName)
+                count = 1
+            }
         }
         
+        collectionViewOne.reloadData()
+        collectionViewTwo.reloadData()
+        collectionViewThree.reloadData()
+        print("nearby.count \(nearby.count)")
     }
     
     // set frame for scroll view
