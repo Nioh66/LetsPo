@@ -29,6 +29,7 @@ class ManageCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 4.0
         layer.borderWidth = 1
         layer.borderColor = UIColor.lightGray.cgColor
+        self.clipsToBounds = true
         backdroundImage.contentMode = .scaleAspectFill
         
         setCall()

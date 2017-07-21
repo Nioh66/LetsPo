@@ -23,7 +23,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
     var nearbyDictionary = [[String:Any]]()
     var titleName:String = ""
     var count: Int = 0
-    
+    var allDictionary = [[String:Any]]()
     
    
     @IBOutlet weak var mapView: MKMapView!
@@ -60,8 +60,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         // 回到當前位置
         let locationButton = UIButton(type: .custom)
         let x = UIScreen.main.bounds.size.width * 0.76
-        let y = UIScreen.main.bounds.size.height * 0.8
-        locationButton.frame = CGRect(x: x, y: y, width: 100, height: 100)
+        let y = UIScreen.main.bounds.size.height * 0.76
+        locationButton.frame = CGRect(x: x, y: y, width: 80, height: 85)
         locationButton.addTarget(self, action: #selector(zoomToUserLocation), for: .touchUpInside)
         let btnImage = UIImage(named: "rightBtn.png")
         locationButton.imageView?.contentMode = .center
@@ -69,6 +69,10 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         
         self.view.addSubview(locationButton)
         
+        allDictionary = getLocations()
+        let notificationName2 = Notification.Name("GetAll")
+        NotificationCenter.default.post(name: notificationName2, object: nil, userInfo: ["PassAll":allDictionary])
+
         
     }
     
@@ -80,6 +84,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         
         mapView.setRegion(mapRegion, animated: true)
     }
+    
     
     // mark - pins method
     func filterAnnotations(paramPlaces:[SpotAnnotation]){
@@ -144,7 +149,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             pin?.annotation = annotation
         }
         let rightBtn = UIButton(type: .detailDisclosure)
-//                rightBtn.setImage(UIImage(named: "rightBtn.png"), for: .normal)
+//        rightBtn.setImage(UIImage(named: "rightBtn.png"), for: .normal)
         rightBtn.frame = CGRect(x: 2, y: 0, width: 40, height: 40)
 
 
@@ -304,8 +309,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         nearbyDictionary.sort { ($0["distance"] as! Double) < ($1["distance"] as! Double) }
         let notificationName = Notification.Name("GetUpdateNoti")
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["PASS":nearbyDictionary])
-        print(nearbyDictionary)
-        print(nearbyDictionary.count)
+//        print(nearbyDictionary)
+//        print(nearbyDictionary.count)
     }
     
     func spot() -> [SpotAnnotation] {

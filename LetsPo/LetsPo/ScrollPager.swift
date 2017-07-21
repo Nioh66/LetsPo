@@ -90,7 +90,7 @@ import UIKit
 		didSet { self.layer.borderWidth = borderWidth }
 	}
 	
-	@IBInspectable public var animationDuration: CGFloat = 0.2
+	@IBInspectable public var animationDuration: CGFloat = 0.1
 	
 	// MARK: - Initializarion -
 	

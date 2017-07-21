@@ -23,6 +23,9 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
     var nearbyDic = [[String:Any]]()
     var count = 0
     
+    var allDic = [[String:Any]]()
+    var recentDic = [[String:Any]]()
+    
     var collectionViewTwo:UICollectionView!
     var collectionViewOne: UICollectionView!
     var collectionViewThree:UICollectionView!
@@ -33,9 +36,6 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-       
-
         
         // register three collectionView
         collectionViewOne = UICollectionView(frame: self.view.frame, collectionViewLayout: FlowLayout())
@@ -44,7 +44,6 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         collectionViewOne.delegate = self
         collectionViewOne.dataSource = self
         scrollView.addSubview(collectionViewOne)
-        
         
         collectionViewTwo = UICollectionView(frame: self.view.frame, collectionViewLayout: FlowLayout())
         collectionViewTwo.register(UINib.init(nibName: "ManageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: identifier)
@@ -60,11 +59,13 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         collectionViewThree.backgroundColor = UIColor.clear
         self.view.addSubview(collectionViewThree)
         
+         NotificationCenter.default.addObserver(self, selector: #selector(getAllLocations(noti:)), name: Notification.Name("GetAll"), object: nil)
+
+        
         // temporary content image
         
  //        nearby = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
         all = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
-        
         recent = NSMutableArray(objects:"deer.jpg","deer.jpg","deer.jpg","deer.jpg")
         
         
@@ -77,10 +78,8 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
             ("NEARBY", collectionViewTwo),
             ("ALL", collectionViewThree),
             ])
-        
-        
-        
     }
+    // Notification center selector method
     func getUpdateNoti(noti:Notification) {
         nearbyDic = noti.userInfo!["PASS"] as! [[String : Any]]
 //        print("fff \(nearbyDic)")
@@ -97,24 +96,28 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
                 count = 1
             }
         }
-        
-        collectionViewOne.reloadData()
         collectionViewTwo.reloadData()
-        collectionViewThree.reloadData()
-        print("nearby.count \(nearby.count)")
+        NotificationCenter.default.removeObserver(self)
+//        print("nearby.count \(nearby.count)")
     }
     
-    // set frame for scroll view
-    override func viewDidLayoutSubviews() {
-        scrollView.frame = CGRect(x: 0.0, y: 0.0, width: contentView.bounds.size.width, height: view.bounds.size.height)
+    func getAllLocations(noti:Notification) {
+        allDic = noti.userInfo!["PassAll"] as! [[String : Any]]
         
+        // copy recent note to recet array for perform
+        // 還沒有照片 因為find my friend 沒有照片！ 先用假圖
+        for value in allDic {
+            let trr = value["friendName"] as! String
+            if recent.count < 6 {
+//                recent.add(trr)
+            }
+        }
+        print(recent)
     }
-    
     
     func scrollPager(scrollPager: ScrollPager, changedIndex: Int) {
         print("scrollPager index changed: \(changedIndex)")
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count = Int()
@@ -138,18 +141,18 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
             let imageString = recent[indexPath.item]
             cell.backdroundImage.image = UIImage(named: imageString as! String)
-            setCellVibrate(cell: cell, path: indexPath)
+            setCellBtn(cell: cell)
             
         }else if collectionView == self.collectionViewTwo {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
             let imageString = nearby[indexPath.item]
             cell.backdroundImage.image = UIImage(named: imageString as! String)
-            setCellVibrate(cell: cell, path: indexPath)
+            setCellBtn(cell: cell)
         }else if collectionView == self.collectionViewThree {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
             let imageString = all[indexPath.item]
             cell.backdroundImage.image = UIImage(named: imageString as! String)
-            setCellVibrate(cell: cell, path: indexPath)
+            setCellBtn(cell: cell)
         }
         
         return cell
@@ -182,8 +185,8 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         deleteBtnFlag = true
         addDoubleTapGesture()
     }
-    
-    func setCellVibrate(cell:ManageCollectionViewCell, path:IndexPath){
+
+    func setCellBtn(cell:ManageCollectionViewCell){
         
         if deleteBtnFlag == true {
             cell.deleteBtn.isHidden = true
@@ -192,6 +195,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         }
         cell.delegation = self
     }
+
     
     func handleDoubleTap(gestureRecognizer:UITapGestureRecognizer){
         hideAllDeleteBtn()
@@ -228,5 +232,12 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         self.navigationController?.isNavigationBarHidden = true
         let notificationName = Notification.Name("GetUpdateNoti")
         NotificationCenter.default.addObserver(self, selector: #selector(getUpdateNoti(noti:)), name: notificationName, object: nil)
+      
+    }
+    
+    // set frame for scroll view
+    override func viewDidLayoutSubviews() {
+        scrollView.frame = CGRect(x: 0.0, y: 0.0, width: contentView.bounds.size.width, height: view.bounds.size.height)
+        
     }
 }
