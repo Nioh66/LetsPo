@@ -11,12 +11,19 @@ import UIKit
 
 class DragBoardVC: UIViewController {
     
-    
+    @IBOutlet weak var boardBackgroundImage: UIImageView!
+    let sendBgImageNN = Notification.Name("sendBgImage")
+    var topBgImages:UIImage?
+
+
+
     override func viewDidLoad() {
+        boardBackgroundImage.image = topBgImages
         
-    }
+//      let doneBtn = navigationItem.rightBarButtonItem.
+
     
-    
-    
+}
+
 }
 

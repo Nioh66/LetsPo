@@ -9,9 +9,17 @@
 import Foundation
 import UIKit
 class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
-    
+    @IBOutlet weak var topBg: UIImageView!
     @IBOutlet weak var boardSetting: UIView!
     @IBOutlet weak var boardCheckBtn: UIImageView!
+
+    let sendBgImageNN = Notification.Name("sendBgImage")
+    var topBgImage:UIImage!
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: sendBgImageNN, object: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +31,37 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
         boardCheckBtn.isUserInteractionEnabled = true
         boardCheckBtn.addGestureRecognizer(tapToNext)
 
+        
+
+        NotificationCenter.default.addObserver(self, selector: #selector(theChooseOne),
+                                               name: sendBgImageNN,
+                                               object: nil)
+        
+        
+    }
+
+    func theChooseOne(notification:Notification) {
+      
+        topBgImage = notification.userInfo!["myBg"] as! UIImage
+        
+        topBg.image = topBgImage
     }
 
    
     func goToNextPage() {
-        let nextVC = storyboard?.instantiateViewController(withIdentifier:"BoardBgImageSetVC") as! BoardBgImageSetVC
+        
+        
+        
+        
+        let dragVC = storyboard?.instantiateViewController(withIdentifier:"DragBoardVC") as! DragBoardVC
+        
+        dragVC.topBgImages = topBg.image
 
-       navigationController?.pushViewController(nextVC, animated: true)
+       navigationController?.pushViewController(dragVC, animated: true)
+        
+        
+        
 //        self.performSegue(withIdentifier: "goBackSetting", sender: self)
-//        present(nextVC, animated: false, completion: nil)
+//        present(dragVC, animated: false, completion: nil)
     }
 }
