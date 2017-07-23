@@ -75,29 +75,42 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         let notificationName2 = Notification.Name("GetAll")
         NotificationCenter.default.post(name: notificationName2, object: nil, userInfo: ["PassAll":allDictionary])
 
-        dataManager = CoreDataManager(initWithModel: "LetsPoModel", dbFileName: "boardData.sqlite", dbPathURL: nil, sortKey: "board_CreateTime", entityName: "boardData")
+        dataManager = CoreDataManager(initWithModel: "LetsPoModel", dbFileName: "boardData.sqlite", dbPathURL: nil, sortKey: "board_CreateTime", entityName: "BoardData")
+        
+//        let result = dataManager.searchField(field: "board_Creater", forKeyword: "jjjj") as! [BoardData]
+//        print(result)
+//        for tmp:BoardData in result{
+//            print("name: \(String(describing: tmp.board_Creater))Lat:\(String(describing: tmp.board_Lat))Lon:\(String(describing: tmp.board_Lon))time:\(String(describing: tmp.board_CreateTime))imge:\(String(describing: tmp.board_BgPic))")
+//        }
+
         
     }
     typealias EditItemCompletion = (_ success: Bool , _ result : BoardData?) -> ()
     
     func editeWithItem(item: BoardData?,withCompletion completion:EditItemCompletion?){
+            
         if(completion == nil){
-            return
+                return
         }
-        var finalItem = item
+            var finalItem = item
+            
+            if(finalItem == nil){
+                finalItem = self.dataManager.createItem()
+                finalItem?.board_CreateTime = NSDate()
+            }
+
+        finalItem?.board_Creater = "Weihao"
+        finalItem?.board_Lat = 37.434844
+        finalItem?.board_Lon = -122.242494
+
+        let img = UIImage(named: "takePhoto.png")
+        let imgData = UIImageJPEGRepresentation(img!, 1)
+        finalItem?.board_BgPic = imgData! as NSData
         
-        if(finalItem == nil){
-            finalItem = self.dataManager.createItem()
-            finalItem?.board_CreateTime = NSDate()
-        }
-        
-//        finalItem?.board_BgPic = UIImage(data: <#T##Data#>)
-//        let imageData = NSData(
-        
-        
-        completion!(true, finalItem)
-        
+            completion!(true, finalItem)
     }
+    
+    
     
     func zoomToUserLocation(){
         var mapRegion = MKCoordinateRegion()
@@ -107,7 +120,20 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         
         mapView.setRegion(mapRegion, animated: true)
     }
-    
+//    func zoomToUserLocation(){
+//        
+//        self.editeWithItem(item: nil) { (success, result) in
+//            if(success){
+//                self.dataManager.saveContexWithCompletion(completion: { (success) in
+//                    if(success){
+//                        print("success")
+//                    }
+//                    
+//                })
+//                
+//            }
+//        }
+//     }
     
     // mark - pins method
     func filterAnnotations(paramPlaces:[SpotAnnotation]){
