@@ -30,9 +30,9 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
     var collectionViewOne: UICollectionView!
     var collectionViewThree:UICollectionView!
     
-//    deinit {
-//        NotificationCenter.default.removeObserver(self)
-//    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,12 +79,12 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
             ("ALL", collectionViewThree),
             ])
     }
+    
     // Notification center selector method
     func getUpdateNoti(noti:Notification) {
         nearbyDic = noti.userInfo!["PASS"] as! [[String : Any]]
 //        print("fff \(nearbyDic)")
         count = count + 1
-        
         for value in nearbyDic {
             let imageName = value["imageName"] as! String
             if count == 1 {
@@ -106,13 +106,13 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         
         // copy recent note to recet array for perform
         // 還沒有照片 因為find my friend 沒有照片！ 先用假圖
-        for value in allDic {
-            let trr = value["friendName"] as! String
-            if recent.count < 6 {
+//        for value in allDic {
+//            let trr = value["friendName"] as! String
+//            if recent.count < 6 {
 //                recent.add(trr)
-            }
-        }
-        print(recent)
+//            }
+//        }
+//        print(recent)
     }
     
     func scrollPager(scrollPager: ScrollPager, changedIndex: Int) {
@@ -148,6 +148,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
             let imageString = nearby[indexPath.item]
             cell.backdroundImage.image = UIImage(named: imageString as! String)
             setCellBtn(cell: cell)
+            
         }else if collectionView == self.collectionViewThree {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
             let imageString = all[indexPath.item]
@@ -178,9 +179,11 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         print("\(indexPath.section),\(indexPath.item)")
         //        準備下一頁
       performSegue(withIdentifier:"manageDetail", sender: self)
+        hideAllDeleteBtn()
         
     }
     
+    // set gesture method
     func setFlagAndGsr(){
         deleteBtnFlag = true
         addDoubleTapGesture()

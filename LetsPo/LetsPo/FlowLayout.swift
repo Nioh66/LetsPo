@@ -7,6 +7,11 @@
 //
 
 import UIKit
+struct CardLayoutConst {
+    static let maxYOffset: CGFloat = -10
+    static let minZoomLevel: CGFloat = 0.9
+    static let minAlpha: CGFloat = 0.5
+}
 
 let ACTIVE_DISTANCE:CGFloat = 200
 let ZOOM_FACTOR:CGFloat = 0.1
@@ -36,22 +41,25 @@ class FlowLayout: UICollectionViewFlowLayout {
     
     // 返回值決定rect範圍内所有元素的frame
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        
         // 獲得super已經計算好的佈局屬性
-        let arr = NSArray(array: super.layoutAttributesForElements(in: rect)!, copyItems: true) as! [UICollectionViewLayoutAttributes]
+        guard let layoutAtts = super.layoutAttributesForElements(in: rect) else { return nil }
+        let arr = NSArray(array:layoutAtts, copyItems: true) as! [UICollectionViewLayoutAttributes]
         
         // 最終顯示的矩形框
         var visible = CGRect()
         visible.origin = (collectionView?.contentOffset)!
         visible.size = (collectionView?.bounds.size)!
         
+        
         // 在繼承的佈局上在進行微調
-        for attributes:UICollectionViewLayoutAttributes in arr {
-            if attributes.frame.intersects(rect) {
+        for attributes in arr {
+            if attributes.frame.intersects(visible) {
                 // cell的中心點x 和 collectionView最中心點的x值 的間距
                 var distance = visible.midX - attributes.center.x
+                
                 // 取絕對值
                 distance = abs(distance)
-                
                 
                 if distance < kScreen_Widgh / 2 + itemSize.width {
                     let zoom = 1 + ZOOM_FACTOR * (1 - distance / ACTIVE_DISTANCE)
@@ -66,9 +74,10 @@ class FlowLayout: UICollectionViewFlowLayout {
         return arr
     }
     
-    // 用於決定 collectionView停止滑動時的偏移量
+//     用於決定 collectionView停止滑動時的偏移量
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         
+       
         // 存放最小的間距值
         var offsetAdjustment = CGFloat(MAXFLOAT)
         // 計算 collectionView 最中心點的x值

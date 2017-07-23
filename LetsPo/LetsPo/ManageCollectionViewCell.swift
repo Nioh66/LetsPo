@@ -42,7 +42,7 @@ class ManageCollectionViewCell: UICollectionViewCell {
     
     // merk: fade animation with delete func
     func fadeAndDelete() {
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 0
         }, completion: { _ in
             self.delegation?.deleteCell(self)

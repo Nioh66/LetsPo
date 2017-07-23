@@ -24,7 +24,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
     var titleName:String = ""
     var count: Int = 0
     var allDictionary = [[String:Any]]()
-    
+
    
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
@@ -47,7 +47,6 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             self.doUnlock()
             self.locationManager.startUpdatingLocation()
         }
-        
         
         mapView.delegate = self
         mapView.userTrackingMode = .follow
@@ -96,7 +95,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         }
         var spotsToShow = [SpotAnnotation]()
         
-        for i in 0...places.count - 1  {
+        for i in 0..<places.count   {
             
             let currentObject = paramPlaces[i]
             let lat = currentObject.coordinate.latitude
@@ -150,18 +149,13 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         }
         let rightBtn = UIButton(type: .detailDisclosure)
 //        rightBtn.setImage(UIImage(named: "rightBtn.png"), for: .normal)
-        rightBtn.frame = CGRect(x: 2, y: 0, width: 40, height: 40)
-
-
         pin?.rightCalloutAccessoryView = rightBtn
         
         
-        let left = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 1))
-        pin?.leftCalloutAccessoryView = left
-        
         let myAnnotation = annotation as! SpotAnnotation
         let detailImage = UIImageView.init(image: myAnnotation.image)
-
+        detailImage.layer.cornerRadius = 5.0
+        detailImage.layer.masksToBounds = true
         
         // Detail view 的 Constraint
         let widthConstraint = NSLayoutConstraint(item: detailImage,
@@ -221,7 +215,6 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             return
         }
         monitorRegion(userLocation: locations.last!)
-        
         locationManager.stopUpdatingLocation()
     }
     
@@ -336,11 +329,12 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             
             result.append(annotation)
         }
+//        print(result)
         return result
     }
     func getLocations() -> [[String:Any]] {
         var friends = [[String:Any]]()
-        
+       
         let UrlString = "http://class.softarts.cc/FindMyFriends/queryFriendLocations.php?GroupName=bp102"
         let myUrl = NSURL(string: UrlString)
         let optData = try? Data(contentsOf: myUrl! as URL)
