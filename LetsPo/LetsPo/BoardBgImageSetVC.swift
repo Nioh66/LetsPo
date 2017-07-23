@@ -21,6 +21,7 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         NotificationCenter.default.removeObserver(self,
                                                   name: NSNotification.Name(rawValue:"sendBgImage"),
                                                   object: nil)
+   
     }
     
     

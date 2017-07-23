@@ -15,7 +15,7 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
 
     let sendBgImageNN = Notification.Name("sendBgImage")
     var topBgImage:UIImage!
-    
+    var thePost:Note!
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: sendBgImageNN, object: nil)
@@ -56,6 +56,9 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
         let dragVC = storyboard?.instantiateViewController(withIdentifier:"DragBoardVC") as! DragBoardVC
         
         dragVC.topBgImages = topBg.image
+        
+        dragVC.thePost = thePost
+        
 
        navigationController?.pushViewController(dragVC, animated: true)
         

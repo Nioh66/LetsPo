@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vlh-Qj-ywM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vlh-Qj-ywM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -31,6 +31,14 @@
                                     <constraint firstAttribute="width" secondItem="rBC-er-8LH" secondAttribute="height" id="roD-39-baQ"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sIK-n2-120">
+                                <rect key="frame" x="164" y="472" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="tdH-Lv-QhE" kind="show" identifier="goTest" id="tRc-sN-4Wx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -42,7 +50,7 @@
                     <navigationItem key="navigationItem" id="MDo-qZ-X95">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="KvP-VW-D9f">
                             <connections>
-                                <segue destination="S9c-oC-CrO" kind="show" id="c95-hb-R9H"/>
+                                <segue destination="S9c-oC-CrO" kind="show" identifier="goBoardSet" id="c95-hb-R9H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -174,10 +182,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Sky.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="SDi-eY-rnV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HD1-4n-gb7">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.48701141984937701" blue="0.27219062837150443" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -185,12 +192,30 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="boardBackgroundImage" destination="SDi-eY-rnV" id="DtA-dK-5t1"/>
+                        <outlet property="topImage" destination="HD1-4n-gb7" id="hL0-Xv-sK0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WeR-B5-HIQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3529" y="1424"/>
+            <point key="canvasLocation" x="3528.8000000000002" y="1423.5382308845578"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="dak-IZ-BjO">
+            <objects>
+                <viewController storyboardIdentifier="testViewController" id="tdH-Lv-QhE" customClass="testViewController" customModule="LetsPo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YzC-Is-nns"/>
+                        <viewControllerLayoutGuide type="bottom" id="7nR-nG-ImF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YRB-qL-0db">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3tg-Ew-XXb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1669" y="2239"/>
         </scene>
         <!--Board Bg Image SetVC-->
         <scene sceneID="oJa-oa-i9V">
@@ -208,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEW-pa-ZGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2657" y="2398"/>
+            <point key="canvasLocation" x="2656.8000000000002" y="2396.8515742128939"/>
         </scene>
     </scenes>
     <resources>

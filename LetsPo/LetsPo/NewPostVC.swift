@@ -9,8 +9,16 @@
 import Foundation
 import UIKit
 
+protocol ThePostDelegate{
+    func sendthePost(post:Note!)
+}
+
+
 class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate{
 
+    
+    var delegate:ThePostDelegate? = nil
+    
     @IBOutlet weak var thePost: Note!
     var myTextView = NoteText()
     //  var myScrollView = NoteScrollview()
@@ -30,12 +38,12 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         //   myTextView.contentInset.top = -64
-        print(myTextView.contentInset)
         
         myTextView.frame = CGRect(x: 0, y: 0, width: thePost.frame.size.width, height: thePost.frame.size.height*0.8)
         thePost.clipsToBounds = true
+       
         DispatchQueue.main.async {
-            self.thePost.addSubview(self.myTextView)
+        self.thePost.addSubview(self.myTextView)
         }
         
         //        myTextView.setNeedsDisplay()
@@ -74,10 +82,35 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         functionBar.setItems(itemsArray, animated: true)
         
         myTextView.inputAccessoryView = functionBar
-      
         self.setKeyboardObserver()
         
     }
+    
+ 
+    func getMyPopo() {
+        self.delegate?.sendthePost(post: thePost)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if(segue.identifier == "goBoardSet"){
+        
+        let newPostSegue = segue.destination as! BoardSettingVC
+        newPostSegue.thePost = thePost
+        
+        }else{
+        
+        
+        let test = segue.destination as! testViewController
+        
+  //      test.popoView = thePost
+
+        }
+        
+    }
+    
+    
     func setKeyboardObserver() {
         
         //      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: ncName, object: nil)
@@ -121,6 +154,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
             else {
                 return
         }
+        
         ftColorInputView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 250)
         ftColorInputView.backgroundColor = UIColor.darkGray
         myTextView.inputView = ftColorInputView
@@ -399,6 +433,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         UIView.animate(withDuration: 1) {
             self.myTextView.resignFirstResponder()
         }
+        
     }
     
     

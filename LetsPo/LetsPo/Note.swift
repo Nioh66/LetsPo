@@ -10,20 +10,25 @@ import Foundation
 import UIKit
 
 class Note: UIView {
-    private var  mydrawTest:Int? = nil
-    private static var noteInstance:Note?
+ //   private var  mydrawTest:Int? = nil
     private let LINE_WIDTH:CGFloat = 2
-  //  var myText = UITextView()
+//  var myText = UITextView()
+//    private static var noteInstance:Note?
+//
+//    static func newNote() -> Note{
+//        
+//        
+//        if noteInstance == nil{
+//            noteInstance = Note()
+//        }
+//        return noteInstance!
+//    }
+
+    
+    
     var shapeLayer = CAShapeLayer()
     
-    static func newNote() -> Note{
-        
-        
-        if noteInstance == nil{
-            noteInstance = Note()
-        }
-        return noteInstance!
-    }
+
     var borderColor = UIColor(red: 182.0/255.0, green: 153.0/255.0, blue: 75.0/255.0, alpha: 0.38)
     var posterColor = UIColor(red: 253.0/255.0, green: 237.0/255.0, blue: 166.0/255.0, alpha: 1.0)
     
@@ -42,7 +47,7 @@ class Note: UIView {
     override func draw(_ rect: CGRect) {
         //Add Note
         
-        if(mydrawTest == nil){
+   //     if(mydrawTest == nil){
     
         let path = UIBezierPath()
 
@@ -72,12 +77,18 @@ class Note: UIView {
         shapeLayer.path = path.cgPath
         
             layer.addSublayer(shapeLayer)
-            
-            mydrawTest = 1}
-        else{
-            return}
-  //          shapeLayer.frame = CGRect(x: 50, y: 50, width: 300, height: 300)
     }
+    
+            
+//            mydrawTest = 1}
+//        else{
+//            return}
+//    }
+    
+    
+    
+    
+    
     // MARK: Change background color
     func changeBgColor(button:UIButton){
         switch button.tag {
@@ -103,7 +114,5 @@ class Note: UIView {
             shapeLayer.fillColor = UIColor.black.cgColor
         }
     }
-    
-
-    
   }
+    

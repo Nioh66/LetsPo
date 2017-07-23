@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3018026C1F246BF300838425 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3018026B1F246BF300838425 /* testViewController.swift */; };
+		3018026E1F249FC600838425 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3018026D1F249FC600838425 /* CoreDataManager.swift */; };
+		301802701F24A0A300838425 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3018026F1F24A0A300838425 /* CoreData.framework */; };
+		301802731F24A26500838425 /* LetsPoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 301802711F24A26500838425 /* LetsPoModel.xcdatamodeld */; };
 		303B08F11F1CC61600D7F6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303B08F01F1CC61600D7F6B1 /* AppDelegate.swift */; };
 		303B08F61F1CC61600D7F6B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303B08F41F1CC61600D7F6B1 /* Main.storyboard */; };
 		303B08F81F1CC61600D7F6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 303B08F71F1CC61600D7F6B1 /* Assets.xcassets */; };
@@ -51,6 +55,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3018026B1F246BF300838425 /* testViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
+		3018026D1F249FC600838425 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		3018026F1F24A0A300838425 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		301802721F24A26500838425 /* LetsPoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LetsPoModel.xcdatamodel; sourceTree = "<group>"; };
 		303B08ED1F1CC61600D7F6B1 /* LetsPo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LetsPo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		303B08F01F1CC61600D7F6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		303B08F51F1CC61600D7F6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -101,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				301802701F24A0A300838425 /* CoreData.framework in Frameworks */,
 				30D092BB1F1E8BD900CB3F88 /* Photos.framework in Frameworks */,
 				30D092B01F1E45A900CB3F88 /* CoreLocation.framework in Frameworks */,
 				30D092AE1F1E45A200CB3F88 /* MapKit.framework in Frameworks */,
@@ -173,6 +182,7 @@
 				30D092B31F1E466300CB3F88 /* BoardSettingVC.swift */,
 				30D092B51F1E490600CB3F88 /* DragBoardVC.swift */,
 				30AB320A1F206454001B1D0E /* BoardBgImageSetVC.swift */,
+				3018026B1F246BF300838425 /* testViewController.swift */,
 			);
 			name = PL;
 			sourceTree = "<group>";
@@ -243,10 +253,12 @@
 		30D092861F1E352800CB3F88 /* Supports */ = {
 			isa = PBXGroup;
 			children = (
+				3018026D1F249FC600838425 /* CoreDataManager.swift */,
 				303B08F01F1CC61600D7F6B1 /* AppDelegate.swift */,
 				303B08F71F1CC61600D7F6B1 /* Assets.xcassets */,
 				303B08F91F1CC61600D7F6B1 /* LaunchScreen.storyboard */,
 				303B08FC1F1CC61600D7F6B1 /* Info.plist */,
+				301802711F24A26500838425 /* LetsPoModel.xcdatamodeld */,
 			);
 			name = Supports;
 			sourceTree = "<group>";
@@ -254,6 +266,7 @@
 		30D092AC1F1E45A100CB3F88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3018026F1F24A0A300838425 /* CoreData.framework */,
 				30D092BA1F1E8BD900CB3F88 /* Photos.framework */,
 				30D092AF1F1E45A900CB3F88 /* CoreLocation.framework */,
 				30D092AD1F1E45A200CB3F88 /* MapKit.framework */,
@@ -392,16 +405,19 @@
 				303B08F11F1CC61600D7F6B1 /* AppDelegate.swift in Sources */,
 				9BA62C5D1F1E6506008CDEC0 /* SpotAnnotation.swift in Sources */,
 				30AB320B1F206454001B1D0E /* BoardBgImageSetVC.swift in Sources */,
+				3018026C1F246BF300838425 /* testViewController.swift in Sources */,
 				30D0928F1F1E35BB00CB3F88 /* MyButton.swift in Sources */,
 				30D0928C1F1E35BB00CB3F88 /* Note.swift in Sources */,
 				9BA62C741F1F7299008CDEC0 /* ManageViewController.swift in Sources */,
 				9BA62C6C1F1F6A3D008CDEC0 /* FlowLayout.swift in Sources */,
 				9BA62C791F1F8065008CDEC0 /* ManageDetailViewController.swift in Sources */,
+				301802731F24A26500838425 /* LetsPoModel.xcdatamodeld in Sources */,
 				9BA62C761F1F7454008CDEC0 /* ScrollPager.swift in Sources */,
 				9BA62C6F1F1F6F11008CDEC0 /* ManageCollectionViewCell.swift in Sources */,
 				9BA62C611F1E66C8008CDEC0 /* MapDetailViewController.swift in Sources */,
 				30D092B41F1E466300CB3F88 /* BoardSettingVC.swift in Sources */,
 				30D0928E1F1E35BB00CB3F88 /* NoteScrollview.swift in Sources */,
+				3018026E1F249FC600838425 /* CoreDataManager.swift in Sources */,
 				30D092B61F1E490600CB3F88 /* DragBoardVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,6 +611,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		301802711F24A26500838425 /* LetsPoModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				301802721F24A26500838425 /* LetsPoModel.xcdatamodel */,
+			);
+			currentVersion = 301802721F24A26500838425 /* LetsPoModel.xcdatamodel */;
+			path = LetsPoModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 303B08E51F1CC61600D7F6B1 /* Project object */;
 }
