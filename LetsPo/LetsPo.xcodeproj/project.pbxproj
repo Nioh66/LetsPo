@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3018026C1F246BF300838425 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3018026B1F246BF300838425 /* testViewController.swift */; };
 		303B08F11F1CC61600D7F6B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303B08F01F1CC61600D7F6B1 /* AppDelegate.swift */; };
 		303B08F61F1CC61600D7F6B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 303B08F41F1CC61600D7F6B1 /* Main.storyboard */; };
 		303B08F81F1CC61600D7F6B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 303B08F71F1CC61600D7F6B1 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3018026B1F246BF300838425 /* testViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		303B08ED1F1CC61600D7F6B1 /* LetsPo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LetsPo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		303B08F01F1CC61600D7F6B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		303B08F51F1CC61600D7F6B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				30D092B31F1E466300CB3F88 /* BoardSettingVC.swift */,
 				30D092B51F1E490600CB3F88 /* DragBoardVC.swift */,
 				30AB320A1F206454001B1D0E /* BoardBgImageSetVC.swift */,
+				3018026B1F246BF300838425 /* testViewController.swift */,
 			);
 			name = PL;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				303B08F11F1CC61600D7F6B1 /* AppDelegate.swift in Sources */,
 				9BA62C5D1F1E6506008CDEC0 /* SpotAnnotation.swift in Sources */,
 				30AB320B1F206454001B1D0E /* BoardBgImageSetVC.swift in Sources */,
+				3018026C1F246BF300838425 /* testViewController.swift in Sources */,
 				30D0928F1F1E35BB00CB3F88 /* MyButton.swift in Sources */,
 				30D0928C1F1E35BB00CB3F88 /* Note.swift in Sources */,
 				9BA62C741F1F7299008CDEC0 /* ManageViewController.swift in Sources */,
