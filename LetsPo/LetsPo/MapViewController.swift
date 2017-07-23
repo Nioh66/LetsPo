@@ -23,7 +23,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
     var nearbyDictionary = [[String:Any]]()
     var titleName:String = ""
     var count: Int = 0
-    
+    var allDictionary = [[String:Any]]()
     
    
     @IBOutlet weak var mapView: MKMapView!
@@ -41,7 +41,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .automotiveNavigation
         
-        
+        self.locationManager.startUpdatingLocation()
         Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { (timer) in
             // 防止秒數內再度觸發方法
             self.doUnlock()
@@ -60,8 +60,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         // 回到當前位置
         let locationButton = UIButton(type: .custom)
         let x = UIScreen.main.bounds.size.width * 0.76
-        let y = UIScreen.main.bounds.size.height * 0.8
-        locationButton.frame = CGRect(x: x, y: y, width: 100, height: 100)
+        let y = UIScreen.main.bounds.size.height * 0.76
+        locationButton.frame = CGRect(x: x, y: y, width: 80, height: 85)
         locationButton.addTarget(self, action: #selector(zoomToUserLocation), for: .touchUpInside)
         let btnImage = UIImage(named: "rightBtn.png")
         locationButton.imageView?.contentMode = .center
@@ -69,7 +69,10 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         
         self.view.addSubview(locationButton)
         
-        
+        allDictionary = getLocations()
+        let notificationName2 = Notification.Name("GetAll")
+        NotificationCenter.default.post(name: notificationName2, object: nil, userInfo: ["PassAll":allDictionary])
+
         
     }
     
@@ -81,6 +84,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         
         mapView.setRegion(mapRegion, animated: true)
     }
+    
     
     // mark - pins method
     func filterAnnotations(paramPlaces:[SpotAnnotation]){
@@ -145,11 +149,19 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             pin?.annotation = annotation
         }
         let rightBtn = UIButton(type: .detailDisclosure)
-        rightBtn.setImage(UIImage(named: "rightBtn.png"), for: .normal)
+//        rightBtn.setImage(UIImage(named: "rightBtn.png"), for: .normal)
+        rightBtn.frame = CGRect(x: 2, y: 0, width: 40, height: 40)
+
+
         pin?.rightCalloutAccessoryView = rightBtn
+        
+        
+        let left = UIImageView(frame: CGRect(x: 0, y: 0, width: 10, height: 1))
+        pin?.leftCalloutAccessoryView = left
         
         let myAnnotation = annotation as! SpotAnnotation
         let detailImage = UIImageView.init(image: myAnnotation.image)
+
         
         // Detail view 的 Constraint
         let widthConstraint = NSLayoutConstraint(item: detailImage,
@@ -208,9 +220,11 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             shouldReUpdate = true
             return
         }
+        monitorRegion(userLocation: locations.last!)
+        
         locationManager.stopUpdatingLocation()
-        monitorRegion()
     }
+    
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
         print("CREATED REGION: \(region.identifier) - \(locationManager.monitoredRegions.count)")
         
@@ -242,8 +256,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         }
     }
     
-    func monitorRegion(){
-        let userLocation = mapView.userLocation.location
+    func monitorRegion(userLocation:CLLocation){
+        let userLocation = userLocation
         let dic = getLocations()
         var distance = CLLocationDistance()
         count = count + 1
@@ -262,19 +276,16 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             }
             
             let pins = CLLocation.init(latitude: lat, longitude: lon)
-            distance = pins.distance(from: userLocation!) * 1.09361
+            distance = pins.distance(from: userLocation) * 1.09361
             
             // 距離小於 2500 則存回 near
             if distance <  2500 {
-                //
-                //                near = ["name":strName,"lat":lat, "lon":lon, "distance":distance]
-                //
                 if count == 1 {
-                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName": UIImage(named: "deer.jpg")!])
+                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName":"sky.jpg"])
                 }else {
                     count = 0
                     nearbyDictionary.removeAll()
-                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName": UIImage(named: "deer.jpg")!])
+                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName":"sky.jpg"])
                     count = 1
                 }
                 if nearbyDictionary.count < 20 {
@@ -325,7 +336,6 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             
             result.append(annotation)
         }
-        
         return result
     }
     func getLocations() -> [[String:Any]] {
@@ -339,6 +349,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         }
         if let jsonArray = try? JSONSerialization.jsonObject(with: data, options:[])  as? [String:AnyObject] {
             friends = (jsonArray?["friends"] as? [[String:Any]])!
+            friends.sort { ($0["lastUpdateDateTime"] as! String) > ($1["lastUpdateDateTime"] as! String) }
+            
         }
         
         return friends
@@ -360,5 +372,4 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             vc.navigationItem.title = titleName
         }
     }
-
 }
