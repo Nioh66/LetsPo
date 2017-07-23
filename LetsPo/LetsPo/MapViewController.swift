@@ -10,8 +10,11 @@ import UIKit
 import MapKit
 import CoreLocation
 import UserNotifications
+import CoreData
 
 class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewDelegate {
+    
+    var dataManager:CoreDataManager<BoardData>!
     
     let locationManager = CLLocationManager()
     var location = CLLocation()
@@ -72,6 +75,27 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         let notificationName2 = Notification.Name("GetAll")
         NotificationCenter.default.post(name: notificationName2, object: nil, userInfo: ["PassAll":allDictionary])
 
+        dataManager = CoreDataManager(initWithModel: "LetsPoModel", dbFileName: "boardData.sqlite", dbPathURL: nil, sortKey: "board_CreateTime", entityName: "boardData")
+        
+    }
+    typealias EditItemCompletion = (_ success: Bool , _ result : BoardData?) -> ()
+    
+    func editeWithItem(item: BoardData?,withCompletion completion:EditItemCompletion?){
+        if(completion == nil){
+            return
+        }
+        var finalItem = item
+        
+        if(finalItem == nil){
+            finalItem = self.dataManager.createItem()
+            finalItem?.board_CreateTime = NSDate()
+        }
+        
+//        finalItem?.board_BgPic = UIImage(data: <#T##Data#>)
+//        let imageData = NSData(
+        
+        
+        completion!(true, finalItem)
         
     }
     
