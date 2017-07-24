@@ -1,5 +1,5 @@
 //
-//  PersnalDetailViewController.swift
+//  PersonalDetailVC.swift
 //  LetsPo
 //
 //  Created by 溫芷榆 on 2017/7/23.
@@ -8,13 +8,12 @@
 
 import UIKit
 
-class PersnalDetailViewController: UIViewController {
+class PersonalDetailVC: UIViewController {
 
-    @IBOutlet weak var ID: UILabel!
-    @IBOutlet weak var idLabel: UILabel!
-    @IBOutlet weak var mailLabel: UILabel!
+    
+    @IBOutlet weak var selfDataTable: UITableView!
+    
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var mail: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,11 +30,7 @@ class PersnalDetailViewController: UIViewController {
     func setLabelWithFrame(){
         nameLabel.font = UIFont.systemFont(ofSize: 25)
         nameLabel.frame = CGRect(x: 0, y: self.view.center.y * 0.70, width: UIScreen.main.bounds.size.width, height: 30)
-        idLabel.frame = CGRect(x: self.view.center.x, y: 310, width: 200, height: 30)
-        mailLabel.frame = CGRect(x: self.view.center.x, y: 360, width: 200, height: 30)
-        ID.frame = CGRect(x: self.view.center.x - 50, y: 310, width: 50, height: 30)
-        mail.frame = CGRect(x: self.view.center.x - 65, y: 360, width: 50, height: 30)
-    }
+      }
     func setPersonalImage(){
         let personalImage = UIImageView()
         personalImage.frame = CGRect(x: self.view.center.x - 75, y: 75, width: 150, height: 150)
@@ -53,7 +48,7 @@ class PersnalDetailViewController: UIViewController {
         
     }
     func editBtnAction(){
-        let nextPage = storyboard?.instantiateViewController(withIdentifier: "InfoEditViewController") as? InfoEditViewController
+        let nextPage = storyboard?.instantiateViewController(withIdentifier: "InfoEditViewController") as? InfoEditVC
         nextPage?.navigationItem.leftItemsSupplementBackButton = true
         navigationController?.pushViewController(nextPage!, animated: true)
     }

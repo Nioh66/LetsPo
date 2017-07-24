@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InfoEditViewController: UIViewController {
+class InfoEditVC: UIViewController {
     @IBOutlet weak var imageEditBtn: UIButton!
     @IBOutlet weak var selfImage: UIImageView!
 

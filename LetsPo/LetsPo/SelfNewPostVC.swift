@@ -13,15 +13,15 @@ class SelfNewPostVC: UIViewController , UINavigationControllerDelegate, UIImageP
     
     @IBOutlet weak var theSelfPost: Note!
     var delegate:ThePostDelegate? = nil
-    
     var myTextView = NoteText()
-    //  var myScrollView = NoteScrollview()
     var textContainer = NSTextContainer()
-    
     var myInputView : UIView?
     var keyboardHeight:CGFloat? = nil
     var photographer = UIImagePickerController()
     var imageFactory = MyPhoto()
+    
+    var bgImage:UIImage!
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
@@ -32,6 +32,8 @@ class SelfNewPostVC: UIViewController , UINavigationControllerDelegate, UIImageP
     override func viewDidLoad() {
         super.viewDidLoad()
         //   myTextView.contentInset.top = -64
+        self.navigationController?.isNavigationBarHidden = false
+
         
         myTextView.frame = CGRect(x: 0, y: 0, width: theSelfPost.frame.size.width, height: theSelfPost.frame.size.height*0.8)
         theSelfPost.clipsToBounds = true
@@ -81,26 +83,14 @@ class SelfNewPostVC: UIViewController , UINavigationControllerDelegate, UIImageP
     }
     
     
-    func getMyPopo() {
-        self.delegate?.sendthePost(post: theSelfPost)
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if(segue.identifier == "goBoardSet"){
+        
+            let newPostSegue = segue.destination as! SelfDragVC
+            newPostSegue.bgImage = bgImage
+            newPostSegue.resizeNote = theSelfPost.resizeNote()
             
-            let newPostSegue = segue.destination as! BoardSettingVC
-            newPostSegue.thePost = theSelfPost
-            
-        }else{
-            
-            
-            let test = segue.destination as! testViewController
-            
-            //      test.popoView = thePost
-            
-        }
         
     }
     

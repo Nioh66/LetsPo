@@ -21,7 +21,6 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         NotificationCenter.default.removeObserver(self,
                                                   name: NSNotification.Name(rawValue:"sendBgImage"),
                                                   object: nil)
-   
     }
     
     
@@ -72,7 +71,7 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
                                                    width: imageWidth,
                                                    height: imageHight))
         
-        defaultBg01.image = UIImage(named: "ooxx")
+        defaultBg01.image = UIImage(named: "Wall2.jpg")
         //   defaultBg01.image = UIImage(contentsOfFile: "ooxx")
         defaultBg02.image = UIImage(named: "myNigger.jpg")
         defaultBg03.image = UIImage(named: "whiteboard-303145_960_720")
@@ -88,20 +87,13 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         defaultBg04.layer.cornerRadius = 100.0
         photosBg.layer.cornerRadius = 100.0
         takeAPhoto.layer.cornerRadius = 10.0
-        //        defaultBg01.backgroundColor = UIColor.red
-        //        defaultBg02.backgroundColor = UIColor.green
-        //        defaultBg03.backgroundColor = UIColor.blue
-        //        defaultBg04.backgroundColor = UIColor.brown
-        //        photosBg.backgroundColor = UIColor.gray
-        //        takeAPhoto.backgroundColor = UIColor.black
+        
         defaultBg01.isUserInteractionEnabled = true
         defaultBg02.isUserInteractionEnabled = true
         defaultBg03.isUserInteractionEnabled = true
         defaultBg04.isUserInteractionEnabled = true
         photosBg.isUserInteractionEnabled = true
         takeAPhoto.isUserInteractionEnabled = true
-        
-        
         
         defaultBg01.addGestureRecognizer(tapDefault01)
         defaultBg02.addGestureRecognizer(tapDefault02)
@@ -124,18 +116,8 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         
            }
     
-//    func theChooseOne(notification:Notification) {
-//        
-//        NotificationCenter.default.addObserver(self, selector: #selector(theChooseOne),
-//                                               name: sendBgImageNN,
-//                                               object: nil)
-//        
-//
-//    }
-    
-    
     func getDefault01Bg(){
-        bgImage = UIImage(named: "ooxx")
+        bgImage = UIImage(named: "Wall2.jpg")
         
         NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
         

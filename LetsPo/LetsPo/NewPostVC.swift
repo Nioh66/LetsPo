@@ -85,12 +85,12 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         self.setKeyboardObserver()
         
     }
-    
  
     func getMyPopo() {
         self.delegate?.sendthePost(post: thePost)
-
     }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
@@ -98,7 +98,11 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         
         let newPostSegue = segue.destination as! BoardSettingVC
         newPostSegue.thePost = thePost
-        
+
+        let resizeNote = thePost.resizeNote()
+        newPostSegue.resizeNote = resizeNote
+            print("----\(resizeNote)-----")
+
         }else{
         
         

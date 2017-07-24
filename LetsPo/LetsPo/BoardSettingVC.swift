@@ -16,14 +16,14 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
     let sendBgImageNN = Notification.Name("sendBgImage")
     var topBgImage:UIImage!
     var thePost:Note!
-    
+    var resizeNote:UIImage!
     deinit {
         NotificationCenter.default.removeObserver(self, name: sendBgImageNN, object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         boardSetting.layer.cornerRadius = 10.0
         boardCheckBtn.layer.cornerRadius = 10.0
     
@@ -56,7 +56,7 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
         let dragVC = storyboard?.instantiateViewController(withIdentifier:"DragBoardVC") as! DragBoardVC
         
         dragVC.topBgImages = topBg.image
-        
+        dragVC.resizeNote = resizeNote
         dragVC.thePost = thePost
         
 

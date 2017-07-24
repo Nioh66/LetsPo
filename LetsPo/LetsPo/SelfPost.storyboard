@@ -31,20 +31,20 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Trashcan.png"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piK-OL-iaF">
-                                <rect key="frame" x="322" y="20" width="37" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="BgSettings.png"/>
-                                <connections>
-                                    <segue destination="yKd-oh-LBE" kind="show" id="UvT-ZQ-abw"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQe-95-wAw">
                                 <rect key="frame" x="314" y="549" width="45" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="AddNote.png"/>
                                 <connections>
-                                    <segue destination="fbQ-x0-dQS" kind="show" id="am6-85-Axa"/>
+                                    <segue destination="fbQ-x0-dQS" kind="show" identifier="newSelfNote" id="am6-85-Axa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piK-OL-iaF">
+                                <rect key="frame" x="322" y="84" width="37" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="BgSettings.png"/>
+                                <connections>
+                                    <segue destination="yKd-oh-LBE" kind="show" identifier="selectBgImage" id="UvT-ZQ-abw"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -69,7 +69,7 @@
         <!--Self New PostVC-->
         <scene sceneID="skm-wK-p9D">
             <objects>
-                <viewController storyboardIdentifier="SelfNewPostVC" id="fbQ-x0-dQS" customClass="SelfNewPostVC" customModule="LetsPo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelfNewPostVC" automaticallyAdjustsScrollViewInsets="NO" id="fbQ-x0-dQS" customClass="SelfNewPostVC" customModule="LetsPo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="okf-np-8Ig"/>
                         <viewControllerLayoutGuide type="bottom" id="gQ0-LY-xpc"/>
@@ -93,13 +93,55 @@
                             <constraint firstItem="v3K-43-XUn" firstAttribute="centerX" secondItem="IUj-54-bPm" secondAttribute="centerX" id="ll9-JZ-VXB"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="Nb4-Mi-cOg">
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Jwo-V4-8Ct">
+                            <connections>
+                                <segue destination="yIR-fP-5Ud" kind="show" id="eth-63-970"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="theSelfPost" destination="v3K-43-XUn" id="nIv-6y-Nwf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZB-FM-HYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1756" y="1390"/>
+            <point key="canvasLocation" x="2700" y="1448"/>
+        </scene>
+        <!--Self DragVC-->
+        <scene sceneID="w3y-FO-HhK">
+            <objects>
+                <viewController storyboardIdentifier="SelfDragVC" id="yIR-fP-5Ud" customClass="SelfDragVC" customModule="LetsPo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oRz-nO-S9Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lnc-4j-dOh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6gG-Du-VZT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fBr-4u-7nV">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fBr-4u-7nV" firstAttribute="leading" secondItem="6gG-Du-VZT" secondAttribute="leading" id="7RM-yk-3Pp"/>
+                            <constraint firstAttribute="trailing" secondItem="fBr-4u-7nV" secondAttribute="trailing" id="B5o-IN-WHV"/>
+                            <constraint firstItem="Lnc-4j-dOh" firstAttribute="top" secondItem="fBr-4u-7nV" secondAttribute="bottom" id="RdW-Ox-fVp"/>
+                            <constraint firstItem="fBr-4u-7nV" firstAttribute="top" secondItem="6gG-Du-VZT" secondAttribute="top" id="ro6-aU-NZ9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="selfBgImage" destination="fBr-4u-7nV" id="JgW-Do-E20"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="649-Eu-Ctx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3612" y="1447.8260869565217"/>
         </scene>
         <!--Self Post Bg SelectVC-->
         <scene sceneID="QD1-KL-GW1">

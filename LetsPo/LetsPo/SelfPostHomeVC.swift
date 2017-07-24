@@ -35,6 +35,18 @@ class SelfPostHomeVC: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "selectBgImage"){
+            _ = segue.destination as! SelfPostBgSelectVC
+            
+        }else if(segue.identifier == "newSelfNote"){
+            let newPostSegue = segue.destination as! SelfNewPostVC
+            newPostSegue.bgImage = selfBgImage.image
+        }else{
+            
+        }
+    }
+    
     func theChooseOne(notification:Notification) {
         
         let  BgImage:UIImage = notification.userInfo!["selfBg"] as! UIImage

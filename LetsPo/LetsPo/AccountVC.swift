@@ -8,7 +8,7 @@
 
 import UIKit
 
-class accountViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class AccountVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
      let cellTitle = ["個人資料","通知管理","好友管理"]
 
@@ -44,7 +44,7 @@ class accountViewController: UIViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(indexPath.row)")
         if indexPath.row == 0 {
-            let nextPage = storyboard?.instantiateViewController(withIdentifier: "PersnalDetailViewController") as? PersnalDetailViewController
+            let nextPage = storyboard?.instantiateViewController(withIdentifier: "PersnalDetailViewController") as? PersonalDetailVC
             nextPage?.navigationItem.leftItemsSupplementBackButton = true
             navigationController?.pushViewController(nextPage!, animated: true)
         }
