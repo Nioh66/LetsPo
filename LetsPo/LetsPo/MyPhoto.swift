@@ -87,9 +87,10 @@ class MyPhoto{
     
 }
 
-    //Fixed photo capture direction
+       //Fixed photo capture direction
 
     extension UIImage {
+        
         
         /// fix orientation
         public class func fixOrientation(ofImage image: UIImage) -> UIImage {

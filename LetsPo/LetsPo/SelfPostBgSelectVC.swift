@@ -1,27 +1,18 @@
 //
-//  BoardBgImageSetVC.swift
+//  SelfPostBgSelectVC.swift
 //  LetsPo
 //
-//  Created by Pin Liao on 2017/7/20.
-//  Copyright © 2017年 Walker. All rights reserved.
+//  Created by Pin Liao on 24/07/2017.
+//  Copyright © 2017 Walker. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class SelfPostBgSelectVC: UIViewController ,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     var photographer = UIImagePickerController()
     let imageFactory = MyPhoto()
     var bgImage:UIImage? = nil
-    let sendBgImageNN = Notification.Name("sendBgImage")
-
-    
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name(rawValue:"sendBgImage"),
-                                                  object: nil)
-    }
+    let sendBgImageNN = Notification.Name("sendSelfBgImage")
     
     
     override func viewDidLoad() {
@@ -37,7 +28,7 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         let tapDefault02 = UITapGestureRecognizer(target: self, action: #selector(getDefault02Bg))
         let tapDefault03 = UITapGestureRecognizer(target: self, action: #selector(getDefault03Bg))
         let tapDefault04 = UITapGestureRecognizer(target: self, action: #selector(getDefault04Bg))
-
+        
         let tapGetPhotos = UITapGestureRecognizer(target: self, action: #selector(getPhotosBg))
         let tapTakePhoto = UITapGestureRecognizer(target: self, action: #selector(takeBgPhoto))
         
@@ -45,33 +36,42 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
                                                     y: hight_Padding,
                                                     width: imageWidth,
                                                     height: imageHight))
-        
+        defaultBg01.layer.cornerRadius = 10.0
+        defaultBg01.layer.masksToBounds = true
         let defaultBg02 = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth,
                                                     y: hight_Padding,
                                                     width: imageWidth,
                                                     height: imageHight))
-        
+        defaultBg02.layer.cornerRadius = 10.0
+        defaultBg02.layer.masksToBounds = true
         let defaultBg03 = UIImageView(frame: CGRect(x: width_Padding,
                                                     y: hight_Padding*2+imageHight,
                                                     width: imageWidth,
                                                     height: imageHight))
-        
-        let defaultBg04 = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth,
-                                                    y: hight_Padding*2+imageHight,
-                                                    width: imageWidth,
-                                                    height: imageHight))
-        
+        defaultBg03.layer.cornerRadius = 10.0
+        defaultBg03.layer.masksToBounds = true
+        let defaultBg04 = UIImageView(frame:
+            CGRect(x: (width_Padding*2)+imageWidth,
+                   y: hight_Padding*2+imageHight,
+                   width: imageWidth,
+                   height: imageHight))
+        defaultBg04.layer.cornerRadius = 10.0
+        defaultBg04.layer.masksToBounds = true
         let photosBg = UIImageView(frame: CGRect(x: width_Padding,
                                                  y: hight_Padding*3+imageHight*2,
                                                  width: imageWidth,
                                                  height: imageHight))
-        
+        photosBg.layer.cornerRadius = 10.0
+        photosBg.layer.masksToBounds = true
         let takeAPhoto = UIImageView(frame: CGRect(x: (width_Padding*2)+imageWidth,
                                                    y: hight_Padding*3+imageHight*2,
                                                    width: imageWidth,
                                                    height: imageHight))
+        takeAPhoto.layer.cornerRadius = 10.0
+        takeAPhoto.layer.masksToBounds = true
         
-        defaultBg01.image = UIImage(named: "Wall2.jpg")
+        
+        defaultBg01.image = UIImage(named: "ooxx")
         //   defaultBg01.image = UIImage(contentsOfFile: "ooxx")
         defaultBg02.image = UIImage(named: "myNigger.jpg")
         defaultBg03.image = UIImage(named: "whiteboard-303145_960_720")
@@ -80,20 +80,14 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         takeAPhoto.image = UIImage(named: "takePhoto")
         
         
-        
-        defaultBg01.layer.cornerRadius = 100.0
-        defaultBg02.layer.cornerRadius = 100.0
-        defaultBg03.layer.cornerRadius = 100.0
-        defaultBg04.layer.cornerRadius = 100.0
-        photosBg.layer.cornerRadius = 100.0
-        takeAPhoto.layer.cornerRadius = 10.0
-        
         defaultBg01.isUserInteractionEnabled = true
         defaultBg02.isUserInteractionEnabled = true
         defaultBg03.isUserInteractionEnabled = true
         defaultBg04.isUserInteractionEnabled = true
         photosBg.isUserInteractionEnabled = true
         takeAPhoto.isUserInteractionEnabled = true
+        
+        
         
         defaultBg01.addGestureRecognizer(tapDefault01)
         defaultBg02.addGestureRecognizer(tapDefault02)
@@ -111,51 +105,52 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         self.view.addSubview(photosBg)
         self.view.addSubview(takeAPhoto)
         
-        
-        
-        
-           }
+        //        let barColor = UIColor(red: 255.0/255.0, green: 252.0/255.0, blue: 238.0/255.0, alpha: 1)
+        //
+        //
+    }
+    
     
     func getDefault01Bg(){
-        bgImage = UIImage(named: "Wall2.jpg")
+        bgImage = UIImage(named: "ooxx")
         
-        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["selfBg":bgImage!])
         
         print("get the default bg pic!")
         
         
         navigationController?.popViewController(animated: true)
-
+        
         
         //        let nextVC = storyboard?.instantiateViewController(withIdentifier:"BoardSettingVC") as! BoardSettingVC
-//               dismiss(animated: true, completion: nil)
-
-
+        //               dismiss(animated: true, completion: nil)
+        
+        
     }
     func getDefault02Bg(){
         bgImage = UIImage(named: "myNigger.jpg")
-        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["selfBg":bgImage!])
         print("get the default bg pic!")
         navigationController?.popViewController(animated: true)
-
+        
     }
-
+    
     func getDefault03Bg(){
         bgImage = UIImage(named: "whiteboard-303145_960_720")
-        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["selfBg":bgImage!])
         print("get the default bg pic!")
         
         navigationController?.popViewController(animated: true)
-
+        
     }
-
+    
     func getDefault04Bg(){
         bgImage = UIImage(named: "Sky.jpg")
-        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":bgImage!])
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["selfBg":bgImage!])
         print("get the default bg pic!")
         navigationController?.popViewController(animated: true)
     }
-
+    
     func getPhotosBg(){
         self.addPictureBtn()
         print("get the bg pic from photos!")
@@ -243,7 +238,7 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         }
         
         UIImageWriteToSavedPhotosAlbum(imageX, self, #selector(saveImage(_:didFinishSavingWithError:contextInfo:)), nil)
-        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["myBg":imageX])
+        NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["selfBg":imageX])
         self.dismiss(animated: true, completion: nil)
         
     }

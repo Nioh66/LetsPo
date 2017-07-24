@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DragBoardVC: UIViewController {
+class DragBoardVC: UIViewController ,UINavigationControllerDelegate{
     
   //  @IBOutlet weak var boardBackgroundImage: UIImageView!
   //  let sendBgImageNN = Notification.Name("sendBgImage")
@@ -17,7 +17,9 @@ class DragBoardVC: UIViewController {
     
     @IBOutlet weak var topImage: UIImageView!
     var thePost:Note!
-
+    var postIt = Note()
+    var resizeNote:UIImage!
+    var NoteImageView = UIImageView()
     var posterX:CGFloat = 150
     var posterY:CGFloat = 150
     let posterEdge:CGFloat = 100
@@ -25,27 +27,55 @@ class DragBoardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+   //     self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
         topImage.image = topBgImages
         
-        self.view.sendSubview(toBack: topImage)
+       
+        NoteImageView.frame = CGRect(x: posterX,
+                              y: posterY,
+                              width: posterEdge,
+                              height: posterEdge)
+        NoteImageView.image = resizeNote
+        print(resizeNote)
+        print(NoteImageView.frame)
+        topImage.addSubview(NoteImageView)
+
+        NoteImageView.isUserInteractionEnabled = true
+        NoteImageView.isMultipleTouchEnabled = true
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panTheNote))
+        
+        panGesture.maximumNumberOfTouches = 1
+        panGesture.minimumNumberOfTouches = 1
+        NoteImageView.addGestureRecognizer(panGesture)
+
+    }
+    @IBAction func finishBtn(_ sender: UIButton) {
         
         
         
-//        var postIt = Note()
-//        postIt.frame = CGRect(x: posterX,
-//                              y: posterY,
-//                              width: posterEdge,
-//                              height: posterEdge)
-//        
-//        postIt = thePost
-//        postIt.shapeLayer.fillColor = UIColor.red.cgColor
-//
-//        self.view.addSubview(postIt)
-//
-        
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "detailViewController") as! ManageDetailViewController
+        navigationController?.pushViewController(nextVC, animated: true)
+
+//        present(nextVC, animated: true, completion: nil)
         
     }
-}
+    @IBAction func backBtn(_ sender: UIButton) {
+        self.navigationController?.navigationBar.isHidden = false
+
+        navigationController?.popViewController(animated: true)
+
+    }
+    
+    func panTheNote(sender:UIPanGestureRecognizer) {
+        
+        let point = sender.location(in: topImage)
+        
+        
+        NoteImageView.center = point
+    }
+  }
 
     
 

@@ -1,33 +1,27 @@
 //
-//  NewPostVC.swift
+//  SelfNewPostVC.swift
 //  LetsPo
 //
-//  Created by Pin Liao on 2017/7/18.
-//  Copyright © 2017年 Walker. All rights reserved.
+//  Created by Pin Liao on 24/07/2017.
+//  Copyright © 2017 Walker. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-protocol ThePostDelegate{
-    func sendthePost(post:Note!)
-}
-
-
-class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate{
-
+class SelfNewPostVC: UIViewController , UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     
+    
+    @IBOutlet weak var theSelfPost: Note!
     var delegate:ThePostDelegate? = nil
-    
-    @IBOutlet weak var thePost: Note!
     var myTextView = NoteText()
-    //  var myScrollView = NoteScrollview()
     var textContainer = NSTextContainer()
-    
     var myInputView : UIView?
     var keyboardHeight:CGFloat? = nil
     var photographer = UIImagePickerController()
     var imageFactory = MyPhoto()
+    
+    var bgImage:UIImage!
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
@@ -38,12 +32,14 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         //   myTextView.contentInset.top = -64
+        self.navigationController?.isNavigationBarHidden = false
+
         
-        myTextView.frame = CGRect(x: 0, y: 0, width: thePost.frame.size.width, height: thePost.frame.size.height*0.8)
-        thePost.clipsToBounds = true
-       
+        myTextView.frame = CGRect(x: 0, y: 0, width: theSelfPost.frame.size.width, height: theSelfPost.frame.size.height*0.8)
+        theSelfPost.clipsToBounds = true
+        
         DispatchQueue.main.async {
-        self.thePost.addSubview(self.myTextView)
+            self.theSelfPost.addSubview(self.myTextView)
         }
         
         //        myTextView.setNeedsDisplay()
@@ -85,32 +81,16 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         self.setKeyboardObserver()
         
     }
- 
-    func getMyPopo() {
-        self.delegate?.sendthePost(post: thePost)
-    }
     
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if(segue.identifier == "goBoardSet"){
-        
-        let newPostSegue = segue.destination as! BoardSettingVC
-        newPostSegue.thePost = thePost
-
-        let resizeNote = thePost.resizeNote()
-        newPostSegue.resizeNote = resizeNote
-            print("----\(resizeNote)-----")
-
-        }else{
         
         
-        let test = segue.destination as! testViewController
-        
-  //      test.popoView = thePost
-
-        }
+            let newPostSegue = segue.destination as! SelfDragVC
+            newPostSegue.bgImage = bgImage
+            newPostSegue.resizeNote = theSelfPost.resizeNote()
+            
         
     }
     
@@ -119,8 +99,8 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         
         //      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: ncName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: .UIKeyboardWillShow, object: nil)
-      }
-   
+    }
+    
     func keyboardWillShow(kbNotification:Notification) {
         
         guard let kbInfo:[AnyHashable:Any] = kbNotification.userInfo,
@@ -381,7 +361,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
     
     
     func changeBgBtn(button:UIButton) {
-        thePost.changeBgColor(button: button)
+        theSelfPost.changeBgColor(button: button)
     }
     
     
@@ -429,7 +409,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     
     // MARK: hideKeyboard
     func hideKeyboard(tapG:UITapGestureRecognizer){
@@ -470,7 +450,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         
         UIImageWriteToSavedPhotosAlbum(imageX, self, #selector(saveImage(_:didFinishSavingWithError:contextInfo:)), nil)
         
-        myTextView.addImageInText(image: imageX, NoteView: thePost)
+        myTextView.addImageInText(image: imageX, NoteView: theSelfPost)
         
         self.dismiss(animated: true, completion: nil)
         
@@ -496,5 +476,3 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
      */
     
 }
-
-    
