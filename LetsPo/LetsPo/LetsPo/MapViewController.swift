@@ -15,6 +15,7 @@ import CoreData
 class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewDelegate {
     
     var dataManager:CoreDataManager<BoardData>!
+    var dataManagerCount = Int()
     
     let locationManager = CLLocationManager()
     var location = CLLocation()
@@ -26,9 +27,8 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
     var nearbyDictionary = [[String:Any]]()
     var titleName:String = ""
     var count: Int = 0
-    var allDictionary = [[String:Any]]()
-
-   
+    
+    
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +56,11 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         mapView.mapType = .standard
         mapView.showsUserLocation = true
         
+        dataManager = CoreDataManager(initWithModel: "LetsPoModel", dbFileName: "boardData.sqlite", dbPathURL: nil, sortKey: "board_CreateTime", entityName: "BoardData")
+        
+        dataManagerCount = dataManager.count()
+        
+        
         places = spot()
         filterAnnotations(paramPlaces: places)
         
@@ -71,20 +76,18 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         
         self.view.addSubview(locationButton)
         
-        allDictionary = getLocations()
-        let notificationName2 = Notification.Name("GetAll")
-        NotificationCenter.default.post(name: notificationName2, object: nil, userInfo: ["PassAll":allDictionary])
-
-        dataManager = CoreDataManager(initWithModel: "LetsPoModel", dbFileName: "boardData.sqlite", dbPathURL: nil, sortKey: "board_CreateTime", entityName: "BoardData")
         
-//        let result = dataManager.searchField(field: "board_Creater", forKeyword: "jjjj") as! [BoardData]
-//        print(result)
+//        let result = dataManager.searchField(field: "board_Privacy", forKeyword: "0") as! [BoardData]
+////        print(result)
 //        for tmp:BoardData in result{
-//            print("name: \(String(describing: tmp.board_Creater))Lat:\(String(describing: tmp.board_Lat))Lon:\(String(describing: tmp.board_Lon))time:\(String(describing: tmp.board_CreateTime))imge:\(String(describing: tmp.board_BgPic))")
+//            print("name: \(String(describing: tmp.board_Creater))Lat:\(String(describing: tmp.board_Lat))Lon:\(String(describing: tmp.board_Lon))time:\(String(describing: tmp.board_CreateTime))Privacy:\(String(describing: tmp.board_Privacy))")
 //        }
-
+//        
         
+        
+       
     }
+    
     typealias EditItemCompletion = (_ success: Bool , _ result : BoardData?) -> ()
     
     func editeWithItem(item: BoardData?,withCompletion completion:EditItemCompletion?){
@@ -99,41 +102,41 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
                 finalItem?.board_CreateTime = NSDate()
             }
 
-        finalItem?.board_Creater = "Weihao"
-        finalItem?.board_Lat = 37.434844
-        finalItem?.board_Lon = -122.242494
+        finalItem?.board_Creater = "Sammi"
+        finalItem?.board_Lat = 37.85446837
+        finalItem?.board_Lon = -122.27523679
 
-        let img = UIImage(named: "takePhoto.png")
+        let img = UIImage(named: "myNigger.jpg")
         let imgData = UIImageJPEGRepresentation(img!, 1)
         finalItem?.board_BgPic = imgData! as NSData
+        finalItem?.board_Privacy = true
         
             completion!(true, finalItem)
     }
     
-    
-    
-    func zoomToUserLocation(){
-        var mapRegion = MKCoordinateRegion()
-        mapRegion.center = self.mapView.userLocation.coordinate
-        mapRegion.span.latitudeDelta = 0.01
-        mapRegion.span.longitudeDelta = 0.01
-        
-        mapView.setRegion(mapRegion, animated: true)
-    }
 //    func zoomToUserLocation(){
+//        var mapRegion = MKCoordinateRegion()
+//        mapRegion.center = self.mapView.userLocation.coordinate
+//        mapRegion.span.latitudeDelta = 0.01
+//        mapRegion.span.longitudeDelta = 0.01
 //        
-//        self.editeWithItem(item: nil) { (success, result) in
-//            if(success){
-//                self.dataManager.saveContexWithCompletion(completion: { (success) in
-//                    if(success){
-//                        print("success")
-//                    }
-//                    
-//                })
-//                
-//            }
-//        }
-//     }
+//        mapView.setRegion(mapRegion, animated: true)
+//    }
+    func zoomToUserLocation(){
+        
+        self.editeWithItem(item: nil) { (success, result) in
+            if(success){
+                self.dataManager.saveContexWithCompletion(completion: { (success) in
+                    if(success){
+                        print("success")
+//                        self.mapView.removeAnnotations(self.mapView.annotations)
+//                        self.mapView.addAnnotations(self.mapView.annotations)
+//                        
+                    }
+                })
+            }
+        }
+     }
     
     // mark - pins method
     func filterAnnotations(paramPlaces:[SpotAnnotation]){
@@ -145,7 +148,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         }
         var spotsToShow = [SpotAnnotation]()
         
-        for i in 0..<places.count   {
+        for i in 0..<places.count {
             
             let currentObject = paramPlaces[i]
             let lat = currentObject.coordinate.latitude
@@ -189,6 +192,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         if (annotation is MKUserLocation) {
             return nil
         }
+                
         let PinIdentifier = "PinIdentifier"
         var pin = mapView.dequeueReusableAnnotationView(withIdentifier: PinIdentifier) as? MKPinAnnotationView
         if (pin == nil){
@@ -229,6 +233,9 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         pin?.detailCalloutAccessoryView = detailImage
         pin?.canShowCallout = true
         pin?.isEnabled = true
+        
+        
+        
         
         return pin
     }
@@ -305,18 +312,15 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         var distance = CLLocationDistance()
         count = count + 1
         for value in dic {
-            let strName = value["friendName"] as! String
+            let strName = value["board_Creater"] as! String
             
             //let time = value["lastUpdateDateTime"] as! String
             
-            var lat = Double()
-            if let latt = Double(value["lat"] as! String) {
-                lat = latt
-            }
-            var lon = Double()
-            if let lonn = Double(value["lon"] as! String) {
-                lon = lonn
-            }
+            let lat = value["lat"] as! Double
+
+            let lon = value["lon"] as! Double
+            
+            let img = value["BgPic"] as! UIImage
             
             let pins = CLLocation.init(latitude: lat, longitude: lon)
             distance = pins.distance(from: userLocation) * 1.09361
@@ -324,11 +328,11 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             // 距離小於 2500 則存回 near
             if distance <  2500 {
                 if count == 1 {
-                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName":"sky.jpg"])
+                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"BgPic":img])
                 }else {
                     count = 0
                     nearbyDictionary.removeAll()
-                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"imageName":"sky.jpg"])
+                    nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"BgPic":img])
                     count = 1
                 }
                 if nearbyDictionary.count < 20 {
@@ -350,8 +354,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             }
         }
         nearbyDictionary.sort { ($0["distance"] as! Double) < ($1["distance"] as! Double) }
-        let notificationName = Notification.Name("GetUpdateNoti")
-        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["PASS":nearbyDictionary])
+        
 //        print(nearbyDictionary)
 //        print(nearbyDictionary.count)
     }
@@ -361,43 +364,54 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         
         let dic = getLocations()
         for value in dic {
-            let strName = value["friendName"] as! String
+            let strName = value["board_Creater"] as! String
             
             // let time = value["lastUpdateDateTime"] as! String
             
-            var lat = CLLocationDegrees()
-            if let latt = Double(value["lat"] as! String) {
-                lat = latt
-            }
-            var lon = CLLocationDegrees()
-            if let lonn = Double(value["lon"] as! String) {
-                lon = lonn
-            }
-            //  let ID = Int(value["id"] as! String)
+            let lat = value["lat"] as! Double
+            let lon = value["lon"] as! Double
+            let img = value["BgPic"] as! UIImage
             
-            let annotation = SpotAnnotation(atitle: strName, lat: lat, lon: lon, imageName: UIImage(named: "deer.jpg")!)
+            let annotation = SpotAnnotation(atitle: strName, lat: lat, lon: lon, imageName: img)
             
             result.append(annotation)
         }
 //        print(result)
         return result
     }
+    
     func getLocations() -> [[String:Any]] {
-        var friends = [[String:Any]]()
+        var locations = [[String:Any]]()
        
-        let UrlString = "http://class.softarts.cc/FindMyFriends/queryFriendLocations.php?GroupName=bp102"
-        let myUrl = NSURL(string: UrlString)
-        let optData = try? Data(contentsOf: myUrl! as URL)
-        guard let data = optData else {
-            return friends
-        }
-        if let jsonArray = try? JSONSerialization.jsonObject(with: data, options:[])  as? [String:AnyObject] {
-            friends = (jsonArray?["friends"] as? [[String:Any]])!
-            friends.sort { ($0["lastUpdateDateTime"] as! String) > ($1["lastUpdateDateTime"] as! String) }
+        
+        for i in 0..<dataManagerCount {
+            let item = dataManager.itemWithIndex(index: i)
             
+            let Creater = item.board_Creater
+            let lat = item.board_Lat
+            let lon = item.board_Lon
+            let time = item.board_CreateTime
+            if let img = item.board_BgPic {
+                let imgWithData = UIImage(data: img as Data)
+                locations.append(["board_Creater":Creater!,"lat":lat,"lon":lon,"board_CreateTime":time!,"BgPic":imgWithData!])
+            }
         }
         
-        return friends
+        print(locations.count)
+
+//        let UrlString = "http://class.softarts.cc/FindMyFriends/queryFriendLocations.php?GroupName=bp102"
+//        let myUrl = NSURL(string: UrlString)
+//        let optData = try? Data(contentsOf: myUrl! as URL)
+//        guard let data = optData else {
+//            return friends
+//        }
+//        if let jsonArray = try? JSONSerialization.jsonObject(with: data, options:[])  as? [String:AnyObject] {
+//            friends = (jsonArray?["friends"] as? [[String:Any]])!
+//            friends.sort { ($0["lastUpdateDateTime"] as! String) > ($1["lastUpdateDateTime"] as! String) }
+//            
+//        }
+        
+        return locations
     }
     
     
@@ -408,10 +422,10 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "getDetail" {
-            
             let vc = segue.destination as! MapDetailViewController
             vc.navigationItem.title = titleName
         }
