@@ -23,6 +23,8 @@ class DragBoardVC: UIViewController ,UINavigationControllerDelegate{
     var posterX:CGFloat = 150
     var posterY:CGFloat = 150
     let posterEdge:CGFloat = 100
+    let resetNote = Notification.Name("resetNote")
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,17 +51,13 @@ class DragBoardVC: UIViewController ,UINavigationControllerDelegate{
         panGesture.maximumNumberOfTouches = 1
         panGesture.minimumNumberOfTouches = 1
         NoteImageView.addGestureRecognizer(panGesture)
-
     }
     @IBAction func finishBtn(_ sender: UIButton) {
         
-        
-        
-        let nextVC = storyboard?.instantiateViewController(withIdentifier: "detailViewController") as! ManageDetailViewController
-        navigationController?.pushViewController(nextVC, animated: true)
+        NotificationCenter.default.post(name: resetNote, object: nil, userInfo: nil)
+            tabBarController?.selectedIndex = 1
+        navigationController?.popToRootViewController(animated: true)
 
-//        present(nextVC, animated: true, completion: nil)
-        
     }
     @IBAction func backBtn(_ sender: UIButton) {
         self.navigationController?.navigationBar.isHidden = false

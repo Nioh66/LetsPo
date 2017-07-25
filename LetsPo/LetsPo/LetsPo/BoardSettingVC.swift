@@ -17,8 +17,12 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
     var topBgImage:UIImage!
     var thePost:Note!
     var resizeNote:UIImage!
+    let resetNote = Notification.Name("resetNote")
+
     deinit {
-        NotificationCenter.default.removeObserver(self, name: sendBgImageNN, object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: sendBgImageNN,
+                                                  object: nil)
     }
     
     override func viewDidLoad() {
@@ -26,6 +30,8 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
 
         boardSetting.layer.cornerRadius = 10.0
         boardCheckBtn.layer.cornerRadius = 10.0
+        topBg.layer.cornerRadius = 10.0
+        topBg.layer.masksToBounds = true
     
         let tapToNext = UITapGestureRecognizer(target: self, action: #selector(goToNextPage))
         boardCheckBtn.isUserInteractionEnabled = true
@@ -37,8 +43,8 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
                                                name: sendBgImageNN,
                                                object: nil)
         
-        
     }
+   
 
     func theChooseOne(notification:Notification) {
       
@@ -50,15 +56,11 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
    
     func goToNextPage() {
         
-        
-        
-        
         let dragVC = storyboard?.instantiateViewController(withIdentifier:"DragBoardVC") as! DragBoardVC
         
         dragVC.topBgImages = topBg.image
         dragVC.resizeNote = resizeNote
         dragVC.thePost = thePost
-        
 
        navigationController?.pushViewController(dragVC, animated: true)
         

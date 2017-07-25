@@ -112,7 +112,7 @@ class SelfPostBgSelectVC: UIViewController ,UIImagePickerControllerDelegate,UINa
     
     
     func getDefault01Bg(){
-        bgImage = UIImage(named: "ooxx")
+        bgImage = UIImage(named: "Wall2.jpg")
         
         NotificationCenter.default.post(name: sendBgImageNN, object: nil, userInfo: ["selfBg":bgImage!])
         

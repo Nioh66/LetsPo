@@ -31,8 +31,9 @@ class SelfPostHomeVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(theChooseOne),
                                                name: sendBgImageNN,
                                                object: nil)
-        
-        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

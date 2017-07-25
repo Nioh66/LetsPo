@@ -71,6 +71,13 @@ class NoteText: UITextView {
             self.textColor = UIColor.black
         }
     }
+    
+    func giveMeFreshNewNoteText() {
+        self.textColor = UIColor.black
+        self.text = "Enter Post content"
+        self.font = UIFont.boldSystemFont(ofSize: 14)
+
+    }
 
     func changeFontsize(value:CGFloat) {
         self.font = UIFont.boldSystemFont(ofSize: value)

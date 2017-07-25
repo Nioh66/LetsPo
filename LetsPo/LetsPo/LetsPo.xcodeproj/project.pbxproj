@@ -25,6 +25,11 @@
 		304CB6831F25970A00AEF632 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 304CB6821F25970A00AEF632 /* right-arrow.png */; };
 		304CB6851F2597F600AEF632 /* insert.png in Resources */ = {isa = PBXBuildFile; fileRef = 304CB6841F2597F600AEF632 /* insert.png */; };
 		304CB6871F25F9B100AEF632 /* SelfDragVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304CB6861F25F9B100AEF632 /* SelfDragVC.swift */; };
+		309EAFA91F26670D00FC3F34 /* NotiSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EAFA81F26670D00FC3F34 /* NotiSettingVC.swift */; };
+		309EAFAD1F26785900FC3F34 /* MyNiggerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EAFAC1F26785900FC3F34 /* MyNiggerVC.swift */; };
+		309EAFAF1F267B9E00FC3F34 /* FindNiggerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EAFAE1F267B9E00FC3F34 /* FindNiggerVC.swift */; };
+		309EAFB11F26E9A000FC3F34 /* MyNiggerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EAFB01F26E9A000FC3F34 /* MyNiggerCell.swift */; };
+		309EAFB31F2721A300FC3F34 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EAFB21F2721A300FC3F34 /* TabBarVC.swift */; };
 		30AB320B1F206454001B1D0E /* BoardBgImageSetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AB320A1F206454001B1D0E /* BoardBgImageSetVC.swift */; };
 		30D0928C1F1E35BB00CB3F88 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D092871F1E35BB00CB3F88 /* Note.swift */; };
 		30D0928D1F1E35BB00CB3F88 /* NoteText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D092881F1E35BB00CB3F88 /* NoteText.swift */; };
@@ -88,6 +93,11 @@
 		304CB6821F25970A00AEF632 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		304CB6841F2597F600AEF632 /* insert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = insert.png; sourceTree = "<group>"; };
 		304CB6861F25F9B100AEF632 /* SelfDragVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfDragVC.swift; sourceTree = "<group>"; };
+		309EAFA81F26670D00FC3F34 /* NotiSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotiSettingVC.swift; sourceTree = "<group>"; };
+		309EAFAC1F26785900FC3F34 /* MyNiggerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNiggerVC.swift; sourceTree = "<group>"; };
+		309EAFAE1F267B9E00FC3F34 /* FindNiggerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindNiggerVC.swift; sourceTree = "<group>"; };
+		309EAFB01F26E9A000FC3F34 /* MyNiggerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNiggerCell.swift; sourceTree = "<group>"; };
+		309EAFB21F2721A300FC3F34 /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		30AB320A1F206454001B1D0E /* BoardBgImageSetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardBgImageSetVC.swift; sourceTree = "<group>"; };
 		30D092871F1E35BB00CB3F88 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		30D092881F1E35BB00CB3F88 /* NoteText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteText.swift; sourceTree = "<group>"; };
@@ -204,6 +214,7 @@
 		30D0927F1F1E349B00CB3F88 /* PL */ = {
 			isa = PBXGroup;
 			children = (
+				309EAFB21F2721A300FC3F34 /* TabBarVC.swift */,
 				304CB6741F258F6D00AEF632 /* SelfPostBgSelectVC.swift */,
 				304CB6781F258FAF00AEF632 /* SelfPostHomeVC.swift */,
 				304CB6761F258F8F00AEF632 /* SelfNewPostVC.swift */,
@@ -351,6 +362,10 @@
 				9BABCA651F24C16F0055B07A /* AccountVC.swift */,
 				9BABCA681F24C4860055B07A /* PersonalDetailVC.swift */,
 				9BABCA6A1F24C6DA0055B07A /* InfoEditVC.swift */,
+				309EAFA81F26670D00FC3F34 /* NotiSettingVC.swift */,
+				309EAFB01F26E9A000FC3F34 /* MyNiggerCell.swift */,
+				309EAFAC1F26785900FC3F34 /* MyNiggerVC.swift */,
+				309EAFAE1F267B9E00FC3F34 /* FindNiggerVC.swift */,
 			);
 			name = accountManage;
 			sourceTree = "<group>";
@@ -451,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				309EAFAF1F267B9E00FC3F34 /* FindNiggerVC.swift in Sources */,
 				304CB6871F25F9B100AEF632 /* SelfDragVC.swift in Sources */,
 				9BA62C5F1F1E65A0008CDEC0 /* MapViewController.swift in Sources */,
 				30D092941F1E369500CB3F88 /* NewPostVC.swift in Sources */,
@@ -459,14 +475,17 @@
 				9BABCA661F24C16F0055B07A /* AccountVC.swift in Sources */,
 				303B08F11F1CC61600D7F6B1 /* AppDelegate.swift in Sources */,
 				304CB6751F258F6D00AEF632 /* SelfPostBgSelectVC.swift in Sources */,
+				309EAFA91F26670D00FC3F34 /* NotiSettingVC.swift in Sources */,
 				9BA62C5D1F1E6506008CDEC0 /* SpotAnnotation.swift in Sources */,
 				30AB320B1F206454001B1D0E /* BoardBgImageSetVC.swift in Sources */,
 				9BABCA6B1F24C6DA0055B07A /* InfoEditVC.swift in Sources */,
 				9BABCA691F24C4860055B07A /* PersonalDetailVC.swift in Sources */,
 				3018026C1F246BF300838425 /* testViewController.swift in Sources */,
+				309EAFB11F26E9A000FC3F34 /* MyNiggerCell.swift in Sources */,
 				30D0928F1F1E35BB00CB3F88 /* MyButton.swift in Sources */,
 				30D0928C1F1E35BB00CB3F88 /* Note.swift in Sources */,
 				304CB6791F258FAF00AEF632 /* SelfPostHomeVC.swift in Sources */,
+				309EAFB31F2721A300FC3F34 /* TabBarVC.swift in Sources */,
 				9BA62C741F1F7299008CDEC0 /* ManageViewController.swift in Sources */,
 				9BA62C6C1F1F6A3D008CDEC0 /* FlowLayout.swift in Sources */,
 				9BA62C791F1F8065008CDEC0 /* ManageDetailViewController.swift in Sources */,
@@ -478,6 +497,7 @@
 				30D0928E1F1E35BB00CB3F88 /* NoteScrollview.swift in Sources */,
 				304CB6771F258F8F00AEF632 /* SelfNewPostVC.swift in Sources */,
 				3018026E1F249FC600838425 /* CoreDataManager.swift in Sources */,
+				309EAFAD1F26785900FC3F34 /* MyNiggerVC.swift in Sources */,
 				30D092B61F1E490600CB3F88 /* DragBoardVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
