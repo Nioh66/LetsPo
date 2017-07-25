@@ -141,7 +141,6 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         else if collectionView == self.collectionViewTwo {
             count = nearby.count
         }else if collectionView == self.collectionViewThree {
-//            count = dataManagerCount
             count = all.count
         }
         return count
@@ -149,43 +148,22 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
   
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = ManageCollectionViewCell()
+        //
         if collectionView == self.collectionViewOne {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
-            if dataManagerCount >= 5 {
-                for _ in 0..<5 {
-                    let item = dataManager.itemWithIndex(index: indexPath.item)
-                    if let img = item.board_BgPic {
-                        let imgWithData = UIImage(data: img as Data)
-                        cell.backdroundImage.image = imgWithData
-                    }
-                }
-            }else {
-                for _ in 0..<dataManagerCount {
-                    let item = dataManager.itemWithIndex(index: indexPath.item)
-                    if let img = item.board_BgPic {
-                        let imgWithData = UIImage(data: img as Data)
-                        cell.backdroundImage.image = imgWithData
-                    }
-                }
-            }
+            let imageString = recent[indexPath.item]
+            cell.backdroundImage.image = imageString as? UIImage
+          
         }else if collectionView == self.collectionViewTwo {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
-//            let imageString = nearby[indexPath.item]
-//            cell.backdroundImage.image = imageString as? UIImage
-            let item = dataManager.itemWithIndex(index: indexPath.item)
-            if let img = item.board_BgPic {
-                let imgWithData = UIImage(data: img as Data)
-                cell.backdroundImage.image = imgWithData
-            }
+            let imageString = nearby[indexPath.item]
+            cell.backdroundImage.image = imageString as? UIImage
+            
         }else if collectionView == self.collectionViewThree {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
-//            let imageString = all[indexPath.item]
-//            cell.backdroundImage.image = imageString as? UIImage
-                let item = dataManager.itemWithIndex(index: indexPath.item)
-                if let img = item.board_BgPic {
-                    let imgWithData = UIImage(data: img as Data)
-                    cell.backdroundImage.image = imgWithData
-                }
+            let imageString = all[indexPath.item]
+            cell.backdroundImage.image = imageString as? UIImage
+           
         }
         setCellBtn(cell: cell)
         return cell
@@ -260,7 +238,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
     
     func addDoubleTapGesture(){
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(gestureRecognizer:)))
-        doubleTap.numberOfTapsRequired = 2
+        doubleTap.numberOfTapsRequired = 1
         view.addGestureRecognizer(doubleTap)
     }
     
@@ -325,7 +303,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
             }
         }
         nearbyDic.sort { ($0["distance"] as! Double) < ($1["distance"] as! Double) }
-        print("near dictionary \(nearbyDic)")
+//        print("near dictionary \(nearbyDic)")
     }
     
     override func didReceiveMemoryWarning() {

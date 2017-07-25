@@ -150,7 +150,6 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
                 })
             }
         }
-        
      }
     
     // mark - pins method
@@ -332,6 +331,7 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
         let userLocation = userLocation
         let dic = getLocations()
         var distance = CLLocationDistance()
+        
         count = count + 1
         for value in dic {
             let strName = value["board_Creater"] as! String
@@ -344,11 +344,13 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             
             let img = value["BgPic"] as! UIImage
             
+            let alert = value["alert"] as! Bool
+            
             let pins = CLLocation.init(latitude: lat, longitude: lon)
             distance = pins.distance(from: userLocation) * 1.09361
             
             // 距離小於 2500 則存回 near
-            if distance <  2500 {
+            if distance <  2500 && alert == true {
                 if count == 1 {
                     nearbyDictionary.append(["name":strName,"lat":lat, "lon":lon, "distance":distance,"BgPic":img])
                 }else {
@@ -414,9 +416,10 @@ class MapViewController:  UIViewController ,CLLocationManagerDelegate,MKMapViewD
             let lon = item.board_Lon
             let time = item.board_CreateTime
             let privacy = item.board_Privacy
+            let alert = item.board_Alert
             if let img = item.board_BgPic {
                 let imgWithData = UIImage(data: img as Data)
-                locations.append(["board_Creater":Creater!,"lat":lat,"lon":lon,"board_CreateTime":time!,"BgPic":imgWithData!,"privacy":privacy])
+                locations.append(["board_Creater":Creater!,"lat":lat,"lon":lon,"board_CreateTime":time!,"BgPic":imgWithData!,"privacy":privacy,"alert":alert])
             }
         }
 //        print("locations :\(locations)")
