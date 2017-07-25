@@ -434,7 +434,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
     // MARK: hideKeyboard
     func hideKeyboard(tapG:UITapGestureRecognizer){
         // self.view.endEditing(true)
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.5) {
             self.myTextView.resignFirstResponder()
         }
         

@@ -26,6 +26,8 @@ class BoardSettingVC: UIViewController ,UINavigationControllerDelegate{
 
         boardSetting.layer.cornerRadius = 10.0
         boardCheckBtn.layer.cornerRadius = 10.0
+        topBg.layer.cornerRadius = 10.0
+        topBg.layer.masksToBounds = true
     
         let tapToNext = UITapGestureRecognizer(target: self, action: #selector(goToNextPage))
         boardCheckBtn.isUserInteractionEnabled = true

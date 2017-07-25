@@ -81,12 +81,23 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
         
         
         
-        defaultBg01.layer.cornerRadius = 100.0
-        defaultBg02.layer.cornerRadius = 100.0
-        defaultBg03.layer.cornerRadius = 100.0
-        defaultBg04.layer.cornerRadius = 100.0
-        photosBg.layer.cornerRadius = 100.0
+        defaultBg01.layer.cornerRadius = 10.0
+        defaultBg01.layer.masksToBounds = true
+        
+        defaultBg02.layer.cornerRadius = 10.0
+        defaultBg02.layer.masksToBounds = true
+
+        defaultBg03.layer.cornerRadius = 10.0
+        defaultBg03.layer.masksToBounds = true
+
+        defaultBg04.layer.cornerRadius = 10.0
+        defaultBg04.layer.masksToBounds = true
+
+        photosBg.layer.cornerRadius = 10.0
+        photosBg.layer.masksToBounds = true
+
         takeAPhoto.layer.cornerRadius = 10.0
+        takeAPhoto.layer.masksToBounds = true
         
         defaultBg01.isUserInteractionEnabled = true
         defaultBg02.isUserInteractionEnabled = true

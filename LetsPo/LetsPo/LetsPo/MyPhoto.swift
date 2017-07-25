@@ -51,7 +51,8 @@ class MyPhoto{
        let myPicker = UIImagePickerController()
         myPicker.sourceType = sourceType
         myPicker.mediaTypes = [String(kUTTypeImage),String(kUTTypeMovie)]
-        myPicker.present(myPicker, animated: true, completion: nil)
+     //   myPicker.delegate = self
+       myPicker.present(myPicker, animated: true, completion: nil)
     }
     
     func resizeFromImage(input:UIImage) -> UIImage? {

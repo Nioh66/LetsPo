@@ -54,8 +54,7 @@ class DragBoardVC: UIViewController ,UINavigationControllerDelegate{
     @IBAction func finishBtn(_ sender: UIButton) {
         
         
-        
-        let nextVC = storyboard?.instantiateViewController(withIdentifier: "detailViewController") as! ManageDetailViewController
+        let nextVC = storyboard?.instantiateViewController(withIdentifier: "ManagePost") as! ManageDetailViewController
         navigationController?.pushViewController(nextVC, animated: true)
 
 //        present(nextVC, animated: true, completion: nil)
