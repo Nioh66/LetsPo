@@ -81,6 +81,8 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
             ("ALL", collectionViewThree),
             ])
         
+        print("cell count \(dataManagerCount)")
+        
     }
     
     func arrayImageData(){
@@ -122,8 +124,8 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         }
         reloadAllData()
 
-        print("recent : \(recent.count)")
-        print("recent : \(all.count)")
+//        print("recent : \(recent.count)")
+        print("all : \(all.count)")
     }
     
     func scrollPager(scrollPager: ScrollPager, changedIndex: Int) {
@@ -139,15 +141,14 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         else if collectionView == self.collectionViewTwo {
             count = nearby.count
         }else if collectionView == self.collectionViewThree {
+//            count = dataManagerCount
             count = all.count
         }
-        
         return count
     }
-    
+  
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell = ManageCollectionViewCell()
-        
         if collectionView == self.collectionViewOne {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
             if dataManagerCount >= 5 {
@@ -176,10 +177,10 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
                 let imgWithData = UIImage(data: img as Data)
                 cell.backdroundImage.image = imgWithData
             }
-            
-            
         }else if collectionView == self.collectionViewThree {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
+//            let imageString = all[indexPath.item]
+//            cell.backdroundImage.image = imageString as? UIImage
                 let item = dataManager.itemWithIndex(index: indexPath.item)
                 if let img = item.board_BgPic {
                     let imgWithData = UIImage(data: img as Data)
@@ -215,14 +216,17 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         }else if let indexPath = collectionViewThree.indexPath(for: cell) {
             let item = dataManager.itemWithIndex(index: indexPath.row)
             dataManager.deleteItem(item: item)
+            
             dataManager.saveContexWithCompletion(completion: { success in
                 if(success){
                     self.all.removeObject(at: indexPath.row)
                     self.collectionViewThree.deleteItems(at: [indexPath])
                     self.reloadAllData()
                 }
+                
             })
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

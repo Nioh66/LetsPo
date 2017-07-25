@@ -15,18 +15,19 @@ class SpotAnnotation: NSObject, MKAnnotation {
     var currentTitle:String!
     var places = [SpotAnnotation]()
     var image = UIImage()
+    var privacy = Bool()
     
     override init() {
         super.init()
     }
     
     
-    init(atitle:String, lat:CLLocationDegrees, lon:CLLocationDegrees, imageName:UIImage) {
+    init(atitle:String, lat:CLLocationDegrees, lon:CLLocationDegrees, imageName:UIImage, privacyBool:Bool) {
         
         coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
         currentTitle = atitle
         image = imageName
-        
+        privacy = privacyBool
         
     }
     public var title: String? {

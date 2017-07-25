@@ -176,7 +176,7 @@ class CoreDataManager<ItemType>: NSObject ,NSFetchedResultsControllerDelegate{
     }//method
     
     // MARK: - Fetched results controller
-    
+    var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
@@ -212,7 +212,7 @@ class CoreDataManager<ItemType>: NSObject ,NSFetchedResultsControllerDelegate{
         
         return _fetchedResultsController!
     }
-    var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    
     
     
     
