@@ -28,11 +28,16 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
     var keyboardHeight:CGFloat? = nil
     var photographer = UIImagePickerController()
     var imageFactory = MyPhoto()
-    
+    let resetNote = Notification.Name("resetNote")
+
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: .UIKeyboardWillShow,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(self,
+                                                  name: resetNote,
+                                                  object: nil)
     }
-    
     
     
     override func viewDidLoad() {
@@ -83,9 +88,27 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         
         myTextView.inputAccessoryView = functionBar
         self.setKeyboardObserver()
+        NotificationCenter.default.addObserver(self, selector: #selector(reset),
+                                               name: resetNote,
+                                               object: nil)
         
+
     }
  
+    func reset(notification:Notification) {
+       
+        
+        thePost.giveMeFreshNewNote()
+        myTextView.giveMeFreshNewNoteText()
+  
+        
+        let noteVC = storyboard?.instantiateViewController(withIdentifier: "NewPost")
+        self.present(noteVC!, animated: false, completion: nil)
+        self.dismiss(animated: false, completion: nil)
+    
+    }
+
+    
     func getMyPopo() {
         self.delegate?.sendthePost(post: thePost)
     }

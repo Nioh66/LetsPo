@@ -14,12 +14,11 @@ class BoardBgImageSetVC: UIViewController,UIImagePickerControllerDelegate,UINavi
     let imageFactory = MyPhoto()
     var bgImage:UIImage? = nil
     let sendBgImageNN = Notification.Name("sendBgImage")
-
     
     
     deinit {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name(rawValue:"sendBgImage"),
+      NotificationCenter.default.removeObserver(self,
+                                                  name: sendBgImageNN,
                                                   object: nil)
     }
     

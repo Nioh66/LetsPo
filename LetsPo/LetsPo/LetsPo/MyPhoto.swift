@@ -17,7 +17,7 @@ enum phototypetest{
     case x1,x2,x3,x4
 }
 
-class MyPhoto{
+class MyPhoto:NSObject,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     
     
@@ -44,16 +44,31 @@ class MyPhoto{
         
     }
     
-    func launchImagePicker(sourceType:UIImagePickerControllerSourceType){
+    func launchImagePicker(sourceType:UIImagePickerControllerSourceType ,VC:UIViewController){
         if (UIImagePickerController.isSourceTypeAvailable(sourceType) == false) {
             return
         }
        let myPicker = UIImagePickerController()
         myPicker.sourceType = sourceType
         myPicker.mediaTypes = [String(kUTTypeImage),String(kUTTypeMovie)]
-     //   myPicker.delegate = self
-       myPicker.present(myPicker, animated: true, completion: nil)
+        myPicker.delegate = self
+       VC.present(myPicker, animated: true, completion: nil)
     }
+    
+    func saveImage(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let saveAlert = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            saveAlert.addAction(UIAlertAction(title: "OK", style: .default))
+ //           self.present(saveAlert, animated: true)
+        } else {
+            let saveAlert = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            saveAlert.addAction(UIAlertAction(title: "OK", style: .default))
+ //           self.present(saveAlert, animated: true)
+        }
+    }
+
+    
     
     func resizeFromImage(input:UIImage) -> UIImage? {
         let maxLength:CGFloat = 1024.0

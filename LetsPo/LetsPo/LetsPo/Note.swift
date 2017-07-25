@@ -71,22 +71,22 @@ class Note: UIView {
         
         shapeLayer.strokeColor = borderColor.cgColor
         shapeLayer.fillColor = posterColor.cgColor
-//        shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.lineWidth = LINE_WIDTH;
         shapeLayer.lineJoin = kCALineJoinRound
         shapeLayer.lineCap = kCALineCapRound
         shapeLayer.path = path.cgPath
             layer.addSublayer(shapeLayer)
     }
-    
-            
 //            mydrawTest = 1}
 //        else{
 //            return}
 //    }
     
     
-    
+    func giveMeFreshNewNote() {
+        shapeLayer.fillColor = posterColor.cgColor
+
+    }
     
     
     // MARK: Change background color

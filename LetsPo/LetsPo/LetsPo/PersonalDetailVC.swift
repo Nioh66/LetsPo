@@ -44,6 +44,7 @@ class PersonalDetailVC: UIViewController ,UITableViewDelegate, UITableViewDataSo
         }
         
     let photos = UIAlertAction(title: "Photos", style: .default) { _ in
+        
         self.photographer.sourceType = .photoLibrary
         self.photographer.allowsEditing = true
         self.photographer.delegate = self
@@ -52,6 +53,8 @@ class PersonalDetailVC: UIViewController ,UITableViewDelegate, UITableViewDataSo
         }
     let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
+        
+       
         alert.addAction(camera)
         alert.addAction(photos)
         alert.addAction(cancel)
