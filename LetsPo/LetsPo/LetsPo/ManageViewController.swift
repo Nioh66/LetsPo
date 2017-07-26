@@ -69,7 +69,6 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (timer) in
            self.arrayImageData()
         }
-
         
         setFlagAndGsr()
         
@@ -163,7 +162,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ManageCollectionViewCell
             let imageString = all[indexPath.item]
             cell.backdroundImage.image = imageString as? UIImage
-           
+        
         }
         setCellBtn(cell: cell)
         return cell
@@ -205,6 +204,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
             })
         }
         
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -221,6 +221,7 @@ class ManageViewController: UIViewController, UICollectionViewDelegate,UICollect
         addDoubleTapGesture()
     }
 
+    // long press call image will show delete button
     func setCellBtn(cell:ManageCollectionViewCell){
         
         if deleteBtnFlag == true {
