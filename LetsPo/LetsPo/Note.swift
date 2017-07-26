@@ -9,53 +9,50 @@
 import Foundation
 import UIKit
 
-@IBDesignable
-class Note: UIView {
- //   private var  mydrawTest:Int? = nil
+@IBDesignable class Note: UIView {
+    //   private var  mydrawTest:Int? = nil
     private let LINE_WIDTH:CGFloat = 2
-//  var myText = UITextView()
-//    private static var noteInstance:Note?
-//
-//    static func newNote() -> Note{
-//        
-//        
-//        if noteInstance == nil{
-//            noteInstance = Note()
-//        }
-//        return noteInstance!
-//    }
-
+    //  var myText = UITextView()
+    //    private static var noteInstance:Note?
+    //
+    //    static func newNote() -> Note{
+    //
+    //
+    //        if noteInstance == nil{
+    //            noteInstance = Note()
+    //        }
+    //        return noteInstance!
+    //    }
+    
     
     
     var shapeLayer = CAShapeLayer()
-    
-
     var borderColor = UIColor(red: 182.0/255.0, green: 153.0/255.0, blue: 75.0/255.0, alpha: 0.38)
     var posterColor = UIColor(red: 253.0/255.0, green: 237.0/255.0, blue: 166.0/255.0, alpha: 1.0)
     
     
     
     override init(frame: CGRect) {
-        super .init(frame: frame)
-
+        super.init(frame: frame)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super .init(coder:aDecoder)
+        super.init(coder:aDecoder)
         self.backgroundColor = UIColor.clear
-
+        
     }
     
     override func draw(_ rect: CGRect) {
         //Add Note
         
-   //     if(mydrawTest == nil){
-    
+        //     if(mydrawTest == nil){
+        
         let path = UIBezierPath()
-
+        
         let height = frame.height
         let width = frame.width
-
+        
         path.move(to:CGPoint(x:0,y:0))
         path.addLine(to: CGPoint(x: 0, y: height))
         path.addLine(to: CGPoint(x: width*0.7, y: height))
@@ -64,11 +61,11 @@ class Note: UIView {
         
         path.move(to:CGPoint(x: width*0.7, y: height))
         path.addQuadCurve(to:CGPoint(x: width, y: height*0.7), controlPoint: CGPoint(x: width,y: height))
-       
+        
         path.addLine(to: CGPoint(x: width, y: 0))
         path.addLine(to: CGPoint(x: 0, y: 0))
-
-
+        
+        
         
         shapeLayer.strokeColor = borderColor.cgColor
         shapeLayer.fillColor = posterColor.cgColor
@@ -76,18 +73,18 @@ class Note: UIView {
         shapeLayer.lineJoin = kCALineJoinRound
         shapeLayer.lineCap = kCALineCapRound
         shapeLayer.path = path.cgPath
-            layer.addSublayer(shapeLayer)
+        layer.addSublayer(shapeLayer)
     }
-//            mydrawTest = 1}
-//        else{
-//            return}
-//    }
+    //            mydrawTest = 1}
+    //        else{
+    //            return}
+    //    }
     
     
     func giveMeFreshNewNote() {
         
         shapeLayer.fillColor = posterColor.cgColor
-
+        
     }
     
     
@@ -116,10 +113,10 @@ class Note: UIView {
             shapeLayer.fillColor = UIColor.black.cgColor
         }
     }
-  }
+}
 
 //  Resize the note
-    extension UIView{
+extension UIView{
     func resizeNote() -> UIImage? {
         UIGraphicsBeginImageContext(CGSize(width: 500, height: 500))
         self.drawHierarchy(in: CGRect(x: 0, y: 0, width: 500, height: 500) , afterScreenUpdates: false)
@@ -129,16 +126,16 @@ class Note: UIView {
         UIGraphicsEndImageContext()
         return returnImage
     }
-        func resizeBoard() -> UIImage? {
-            UIGraphicsBeginImageContext(CGSize(width: self.frame.size.width, height: self.frame.size.height))
-            self.drawHierarchy(in: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height) , afterScreenUpdates: false)
-            
-            let returnImage = UIGraphicsGetImageFromCurrentImageContext()
-            
-            UIGraphicsEndImageContext()
-            return returnImage
-        }
-
+    func resizeBoard() -> UIImage? {
+        UIGraphicsBeginImageContext(CGSize(width: self.frame.size.width, height: self.frame.size.height))
+        self.drawHierarchy(in: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height) , afterScreenUpdates: false)
+        
+        let returnImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        return returnImage
+    }
+    
     
 }
 
