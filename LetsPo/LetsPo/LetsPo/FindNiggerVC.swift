@@ -32,7 +32,6 @@ class FindNiggerVC: UIViewController {
             UIView.animate(withDuration: 0.5) {
                 self.inputID.resignFirstResponder()
         }
-
     }
     
     override func didReceiveMemoryWarning() {

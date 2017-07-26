@@ -17,19 +17,19 @@ class DragBoardVC: UIViewController ,UINavigationControllerDelegate{
     
     @IBOutlet weak var topImage: UIImageView!
     var thePost:Note!
-    var postIt = Note()
     var resizeNote:UIImage!
     var NoteImageView = UIImageView()
-    var posterX:CGFloat = 150
-    var posterY:CGFloat = 150
+    let posterX:CGFloat = 150
+    let posterY:CGFloat = 150
     let posterEdge:CGFloat = 100
     let resetNote = Notification.Name("resetNote")
+       
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-   //     self.navigationController?.navigationBar.isHidden = true
+               
         self.tabBarController?.tabBar.isHidden = false
         topImage.image = topBgImages
         
@@ -39,26 +39,53 @@ class DragBoardVC: UIViewController ,UINavigationControllerDelegate{
                               width: posterEdge,
                               height: posterEdge)
         NoteImageView.image = resizeNote
-        print(resizeNote)
-        print(NoteImageView.frame)
         topImage.addSubview(NoteImageView)
 
         NoteImageView.isUserInteractionEnabled = true
-        NoteImageView.isMultipleTouchEnabled = true
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panTheNote))
-        
         panGesture.maximumNumberOfTouches = 1
         panGesture.minimumNumberOfTouches = 1
         NoteImageView.addGestureRecognizer(panGesture)
     }
+    
+    
+    
+    func colorConvert(color: CGColor?) -> Data?{
+        var colorData:Data?
+        
+        if let color = color {
+            colorData = NSKeyedArchiver.archivedData(withRootObject: color) as! Data
+        }
+        
+        
+       return colorData
+    }
+    
+    
     @IBAction func finishBtn(_ sender: UIButton) {
+
+//        print("\(String(describing:UIColor.blue))")
+        
+        
+//       let noteItem = noteDataManager.createItem()
+//        noteItem.note_X = Int64(NoteImageView.frame.minX)
+//        noteItem.note_Y = Int64(NoteImageView.frame.minY)
+//        noteItem.note_BgColor = thePost.shapeLayer.fillColor as! String
+//          noteItem.note_Content =
+//      noteItem.note_FontColor
+//      noteItem.note_FontSize
+    print(self.colorConvert(color: UIColor.red.cgColor))
+        
         
         NotificationCenter.default.post(name: resetNote, object: nil, userInfo: nil)
             tabBarController?.selectedIndex = 1
         navigationController?.popToRootViewController(animated: true)
 
     }
+    
+    
+    
     @IBAction func backBtn(_ sender: UIButton) {
         self.navigationController?.navigationBar.isHidden = false
 

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class Note: UIView {
  //   private var  mydrawTest:Int? = nil
     private let LINE_WIDTH:CGFloat = 2
@@ -84,6 +85,7 @@ class Note: UIView {
     
     
     func giveMeFreshNewNote() {
+        
         shapeLayer.fillColor = posterColor.cgColor
 
     }

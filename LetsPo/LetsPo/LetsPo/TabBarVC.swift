@@ -7,6 +7,27 @@
 //
 
 import UIKit
+import CoreData
+var noteDataManager:CoreDataManager<NoteData> = CoreDataManager.init(initWithModel: "LetsPoModel",
+                                                                        dbFileName: "LetsPo.sqlite",
+                                                                        dbPathURL: nil,
+                                                                        sortKey: "note_ID",
+                                                                        entityName: "NoteData")
+var boardDataManager:CoreDataManager<BoardData> = CoreDataManager.init(initWithModel: "LetsPoModel",
+                                                                          dbFileName: "LetsPo.sqlite",
+                                                                          dbPathURL: nil,
+                                                                          sortKey: "board_CreateTime",
+                                                                          entityName: "BoardData")
+var memberDataManager:CoreDataManager<MemberData> = CoreDataManager.init(initWithModel: "LetsPoModel",
+                                                                        dbFileName: "LetsPo.sqlite",
+                                                                        dbPathURL: nil,
+                                                                        sortKey: "member_ID",
+                                                                        entityName: "MemberData")
+
+
+
+
+
 
 class TabBarVC: UITabBarController {
 

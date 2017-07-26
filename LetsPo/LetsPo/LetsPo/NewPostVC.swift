@@ -124,15 +124,7 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
 
         let resizeNote = thePost.resizeNote()
         newPostSegue.resizeNote = resizeNote
-            print("----\(resizeNote)-----")
-
         }else{
-        
-        
-        let test = segue.destination as! testViewController
-        
-  //      test.popoView = thePost
-
         }
         
     }
@@ -460,7 +452,10 @@ class NewPostVC: UIViewController,UINavigationControllerDelegate,UIImagePickerCo
         UIView.animate(withDuration: 0.5) {
             self.myTextView.resignFirstResponder()
         }
-        
+//        print(String(describing: thePost.shapeLayer.fillColor))
+//        print(String(describing: myTextView.textColor))
+//        print(String(describing: myTextView.font))
+//        print(myTextView.text)
     }
     
     

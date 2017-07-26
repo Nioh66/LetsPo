@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3018026C1F246BF300838425 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3018026B1F246BF300838425 /* testViewController.swift */; };
 		3018026E1F249FC600838425 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3018026D1F249FC600838425 /* CoreDataManager.swift */; };
 		301802701F24A0A300838425 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3018026F1F24A0A300838425 /* CoreData.framework */; };
 		301802731F24A26500838425 /* LetsPoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 301802711F24A26500838425 /* LetsPoModel.xcdatamodeld */; };
@@ -73,7 +72,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3018026B1F246BF300838425 /* testViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		3018026D1F249FC600838425 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3018026F1F24A0A300838425 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		301802721F24A26500838425 /* LetsPoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LetsPoModel.xcdatamodel; sourceTree = "<group>"; };
@@ -223,7 +221,6 @@
 				30D092B31F1E466300CB3F88 /* BoardSettingVC.swift */,
 				30D092B51F1E490600CB3F88 /* DragBoardVC.swift */,
 				30AB320A1F206454001B1D0E /* BoardBgImageSetVC.swift */,
-				3018026B1F246BF300838425 /* testViewController.swift */,
 				9BABCA671F24C4000055B07A /* accountManage */,
 			);
 			name = PL;
@@ -480,7 +477,6 @@
 				30AB320B1F206454001B1D0E /* BoardBgImageSetVC.swift in Sources */,
 				9BABCA6B1F24C6DA0055B07A /* InfoEditVC.swift in Sources */,
 				9BABCA691F24C4860055B07A /* PersonalDetailVC.swift in Sources */,
-				3018026C1F246BF300838425 /* testViewController.swift in Sources */,
 				309EAFB11F26E9A000FC3F34 /* MyNiggerCell.swift in Sources */,
 				30D0928F1F1E35BB00CB3F88 /* MyButton.swift in Sources */,
 				30D0928C1F1E35BB00CB3F88 /* Note.swift in Sources */,
